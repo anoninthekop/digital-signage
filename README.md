@@ -21,7 +21,7 @@ Administrator Panel: Slides inside a slideshow
 
 ### Demo
 
-Use the demo website at [http://digitaldisplay.herokuapp.com](http://digitaldisplay.herokuapp.com) (username: **demo**, password: **demo**)
+See Create demo account below
 
 ### How to Run:
 
@@ -40,6 +40,12 @@ and specify the URI to your database.
 npm install
 npm run dev
 ```
+5. Create demo account
+
+```html
+http://localhost:3001/demo
+```
+(username: **demo**, password: **demo**)
 
 ### Updating the software
 
