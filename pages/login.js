@@ -5,7 +5,7 @@ import { faTv, faCheck, faTimes, faAngleLeft } from '@fortawesome/free-solid-svg
 import { view } from 'react-easy-state'
 
 
-// the hook
+// i18next
 import { withTranslation } from 'react-i18next'
 
 

@@ -56,5 +56,14 @@ export const FRENCH = {
         placeholder: 'Slideshow sans titre'
       },
       button: '+ Ajouter un slide'
-    }
+    },
+    sidebar : {
+      screen : 'Ecrans',
+      layout: 'Modèle',
+      preview: 'Prévisualisation',
+      slideshow:'Slideshows',
+      login: "S'identifier",
+      logout: '   Déconnexion',
+      online: 'En ligne'
+    },
   }

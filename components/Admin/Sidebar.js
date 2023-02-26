@@ -18,6 +18,9 @@ import {
 import DropdownButton from '../DropdownButton'
 import { view } from 'react-easy-state'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 import { logout } from '../../helpers/auth'
 import { display } from '../../stores'
 import { getDisplays } from '../../actions/display'
@@ -44,31 +47,31 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { router, loggedIn } = this.props
+    const { t, router, loggedIn } = this.props
     const { displays } = this.state
     const menu = loggedIn
       ? [
           {
             id: 'screen',
-            name: 'Screens',
+            name: t('sidebar.screen'),
             path: '/screens?display=' + display.id,
             icon: faTv
           },
           {
             id: 'layout',
-            name: 'Layout',
+            name: t('sidebar.layout'),
             path: '/layout?display=' + display.id,
             icon: faThLarge
           },
           {
             id: 'preview',
-            name: 'Preview',
+            name: t('sidebar.preview'),
             path: '/preview?display=' + display.id,
             icon: faEye
           },
           {
             id: 'slideshow',
-            name: 'Slideshows',
+            name: t('sidebar.slideshow'),
             path: '/slideshows?display=' + display.id,
             icon: faImages
           }
@@ -76,7 +79,7 @@ class Sidebar extends Component {
       : [
           {
             id: 'login',
-            name: 'Login',
+            name: t('sidebar.login'),
             path: '/login?display=' + display.id,
             icon: faKey
           }
@@ -99,7 +102,7 @@ class Sidebar extends Component {
               </div>
               <div className='info'>
                 <span className='name'>{display.name}</span>
-                <span className='status online'>online</span>
+                <span className='status online'>{t('sidebar.online')}</span>
               </div>
               <div className='caret'>
                 <FontAwesomeIcon icon={'caret-down'} fixedWidth />
@@ -126,7 +129,7 @@ class Sidebar extends Component {
           <div className='logout' onClick={() => logout()}>
             <a>
               <FontAwesomeIcon icon={faSignOutAlt} fixedWidth />
-              <span className={'text'}>{'   Logout'}</span>
+              <span className={'text'}>{t('sidebar.logout')}</span>
             </a>
           </div>
         )}
@@ -243,4 +246,4 @@ class Sidebar extends Component {
   }
 }
 
-export default withRouter(view(Sidebar))
+export default withRouter(withTranslation()(view(Sidebar)))

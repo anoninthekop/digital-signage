@@ -55,5 +55,15 @@ export const ENGLISH = {
         placeholder: 'Untitled Slideshow'
       },
       button: 'Add a slide'
-    }
+    },
+    sidebar : {
+      screen : 'Screens',
+      layout: 'Layout',
+      preview: 'Preview',
+      slideshow:'Slideshows',
+      login: 'Login',
+      logout: '   Logout',
+      online: 'online'
+    },
+
   }
