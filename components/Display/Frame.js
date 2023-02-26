@@ -24,7 +24,7 @@ class Frame extends React.Component {
               return (
                 <div className={type}>
                   {type == 'date' ? (
-                    <Clock locale={'fr'} ticking={true} format={'dddd, MMMM Do '} />
+                    <Clock locale={'fr'} ticking={true} format={'dddd Do MMMM' } />
                   ) : type == 'connection' ? (
                     <FontAwesomeIcon className={'wifi'} icon={faWifi} />
                   ) : type == 'time' ? (
