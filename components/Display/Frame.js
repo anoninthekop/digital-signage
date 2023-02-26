@@ -24,11 +24,11 @@ class Frame extends React.Component {
               return (
                 <div className={type}>
                   {type == 'date' ? (
-                    <Clock ticking={true} format={'dddd, MMMM Do.'} />
+                    <Clock locale={'fr'} ticking={true} format={'dddd, MMMM Do '} />
                   ) : type == 'connection' ? (
                     <FontAwesomeIcon className={'wifi'} icon={faWifi} />
                   ) : type == 'time' ? (
-                    <Clock ticking={true} format={'H:mm'} />
+                    <Clock locale={'fr'} ticking={true} format={'H:mm'} />
                   ) : (
                     ' '
                   )}

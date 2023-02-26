@@ -4,11 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTv, faCheck, faTimes, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { view } from 'react-easy-state'
 
+
+// the hook
+import { withTranslation } from 'react-i18next'
+
+
 import Frame from '../components/Admin/Frame.js'
 import { login } from '../helpers/auth.js'
 import { display } from '../stores'
 
+
+
 class Login extends Component {
+
   constructor(props) {
     super(props)
 
@@ -55,11 +63,14 @@ class Login extends Component {
   }
 
   render() {
-    const { loggedIn } = this.props
+    const { t, loggedIn } = this.props
     const { alert } = this.state
+
     return (
       <Frame loggedIn={loggedIn}>
-        <h1>Login</h1>
+
+        <h1>{t('login.title')}</h1>
+  
         <div className='formContainer'>
           <div className='logo'>
             <div className='icon'>
@@ -84,37 +95,37 @@ class Login extends Component {
                 />
                 <span className={'alert-text'}>
                   {alert == 'success'
-                    ? 'Successfully logged in to your account.'
-                    : 'Username or password not recognized.'}
+                    ? t('login.alert.success')
+                    : t('login.alert.error')}
                 </span>
               </div>
             )}
             <div className={'alert-info'}>
               <span className={'alert-text'}>
-                Use the username "demo" and password "demo"
+              {t('login.alert.info')}
               </span>
             </div>
-            <label for='username'>Username</label>
+            <label for='username'>{t('login.username.name')}</label>
             <input
               type='text'
               className='username'
               id='username'
-              placeholder='Enter your username...'
+              placeholder= {t('login.username.placeholder')}
               onChange={this.usernameChangeHandler}
             />
-            <label for='password'>Password</label>
+            <label for='password'>{t('login.password.name')}</label>
             <input
               type='password'
               className='password'
               id='password'
-              placeholder='Enter your password...'
+              placeholder= {t('login.password.placeholder')}
               onChange={this.passwordChangeHandler}
             />
-            <button>Log In.</button>
+            <button>{t('login.submit')}</button>
           </form>
           <Link href='/'>
             <span className='back'>
-              <FontAwesomeIcon icon={faAngleLeft} fixedWidth /> Back to the home page
+              <FontAwesomeIcon icon={faAngleLeft} fixedWidth /> {t('login.back')}
             </span>
           </Link>
         </div>
@@ -232,4 +243,4 @@ class Login extends Component {
   }
 }
 
-export default view(Login)
+export default withTranslation() (view(Login))

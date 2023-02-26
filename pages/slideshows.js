@@ -1,6 +1,9 @@
 import React from 'react'
 import { view } from 'react-easy-state'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 import Frame from '../components/Admin/Frame.js'
 import SlideshowList from '../components/Admin/SlideshowList.js'
 import Dialog from '../components/Dialog.js'
@@ -29,15 +32,15 @@ class Slideshows extends React.Component {
   }
 
   render() {
-    const { loggedIn } = this.props
+    const { t, loggedIn } = this.props
     return (
       <Frame loggedIn={loggedIn}>
-        <h1>Slideshows</h1>
+        <h1>{t('slideshows.title')}</h1>
         <div className='wrapper'>
           <SlideshowList ref={this.slideshowList} />
           <Dialog />
           <Button
-            text={'+ Add new slideshow'}
+            text={t('slideshows.button')}
             color={'#8bc34a'}
             onClick={this.add}
             style={{ marginLeft: 0, width: '100%' }}
@@ -62,4 +65,4 @@ class Slideshows extends React.Component {
   }
 }
 
-export default protect(view(Slideshows))
+export default protect(withTranslation()(view(Slideshows)))

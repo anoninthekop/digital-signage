@@ -3,15 +3,17 @@ import Link from 'next/link'
 import Router from 'next/router'
 import DropdownButton from '../components/DropdownButton'
 
+
+
 import { getDisplays } from '../actions/display'
 
 class Index extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       displays: props.displays || []
     }
+
   }
 
   static async getInitialProps({ req }) {
@@ -26,7 +28,8 @@ class Index extends React.Component {
   }
 
   render() {
-    const { displays = [] } = this.state
+    const { displays = []} = this.state
+
     return (
       <div className='home'>
         <p>The Digital Signage server is running in the background.</p>
@@ -101,4 +104,4 @@ const styles = {
   }
 }
 
-export default Index
+export default Index //withTranslation()

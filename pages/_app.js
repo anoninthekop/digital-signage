@@ -1,5 +1,9 @@
 import App, { Container } from 'next/app'
 import React from 'react'
+import i18n from './i18n'
+import { I18nextProvider } from 'react-i18next'
+
+
 
 import '../styles/GridLayoutStyles.css'
 import 'react-resizable/css/styles.css'
@@ -19,7 +23,9 @@ export default class NextApp extends App {
     const { Component, pageProps } = this.props
     return (
       <Container>
-        <Component {...pageProps} />
+        <I18nextProvider i18n={i18n}>
+          <Component {...pageProps} />
+        </I18nextProvider>
       </Container>
     )
   }

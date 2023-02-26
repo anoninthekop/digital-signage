@@ -4,6 +4,9 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
 import { view } from 'react-easy-state'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 import Frame from '../components/Admin/Frame.js'
 import SlideList from '../components/Admin/SlideList.js'
 import SlideEditDialog from '../components/Admin/SlideEditDialog'
@@ -55,15 +58,15 @@ class Slideshow extends React.Component {
   }
 
   render() {
-    const { loggedIn } = this.props
+    const { t, loggedIn } = this.props
     const { slideshow } = this.state
     return (
       <Frame loggedIn={loggedIn}>
-        <h1 className='title'>Slideshow: </h1>{' '}
+        <h1 className='title'>{t('slideshow.title.name')} : </h1>{' '}
         <div className='editable-title'>
           <input
             className='input'
-            placeholder='Untitled Slideshow'
+            placeholder={t('slideshow.title.placeholder')}
             value={slideshow && slideshow.title}
             onChange={event => {
               const target = event.target
@@ -97,7 +100,7 @@ class Slideshow extends React.Component {
             ref={this.dialog}
           />
           <Button
-            text='Add a slide'
+            text={t('slideshow.button')}
             color='#7bc043'
             style={{ flex: 1, margin: 0, width: '100%', marginTop: 20 }}
             onClick={this.openAddDialog}
@@ -151,4 +154,4 @@ class Slideshow extends React.Component {
   }
 }
 
-export default protect(view(Slideshow))
+export default protect(withTranslation()(view(Slideshow)))

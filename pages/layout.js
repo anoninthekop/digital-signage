@@ -5,6 +5,9 @@ import GridLayout from 'react-grid-layout'
 import { view } from 'react-easy-state'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 import Frame from '../components/Admin/Frame.js'
 import EditableWidget from '../components/Admin/EditableWidget'
 import StatusBarElement from '../components/Admin/StatusBarElement'
@@ -81,7 +84,7 @@ class Layout extends React.Component {
 
   render() {
     const { widgets } = this.state
-    const { loggedIn } = this.props
+    const { t, loggedIn } = this.props
     const layout = widgets.map(widget => ({
       i: widget._id,
       x: widget.x || 0,
@@ -93,11 +96,11 @@ class Layout extends React.Component {
     return (
       <Frame loggedIn={loggedIn}>
         <div className={'head'}>
-          <h1>Layout</h1>
+          <h1>{t('layout.head')}</h1>
           <div className='editable-title'>
             <input
               className='input'
-              placeholder='Unnamed display'
+              placeholder={t('layout.title.placeholder')}
               value={display && display.name}
               onChange={event => {
                 const target = event.target
@@ -117,7 +120,7 @@ class Layout extends React.Component {
         <div className='settings'>
           <DropdownButton
             icon='plus'
-            text='Add Status Bar Item'
+            text={t('layout.settings.item')}
             onSelect={display.addStatusBarItem}
             choices={Object.keys(StatusBarElementTypes).map(statusBarEl => ({
               key: statusBarEl,
@@ -162,7 +165,7 @@ class Layout extends React.Component {
         <div className='settings'>
           <DropdownButton
             icon='plus'
-            text='Add Widget'
+            text={t('layout.settings.widget')}
             onSelect={this.addWidget}
             choices={Object.keys(Widgets).map(widget => ({
               key: widget,
@@ -172,8 +175,8 @@ class Layout extends React.Component {
           />
           <Form>
             <Switch
-              checkedLabel={'Compact'}
-              uncheckedLabel={'Spaced'}
+              checkedLabel={t('layout.compact')}
+              uncheckedLabel={t('layout.spaced')}
               checkedIcon={faTh}
               uncheckedIcon={faThLarge}
               checked={display.layout == 'spaced'}
@@ -266,4 +269,4 @@ class Layout extends React.Component {
   }
 }
 
-export default protect(view(Layout))
+export default (protect(withTranslation()(view(Layout))))

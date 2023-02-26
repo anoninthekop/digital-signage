@@ -1,6 +1,9 @@
 import React from 'react'
 import { view } from 'react-easy-state'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 import Frame from '../components/Admin/Frame.js'
 import Display from '../components/Display/Display.js'
 import { protect } from '../helpers/auth.js'
@@ -17,11 +20,11 @@ class Preview extends React.Component {
   }
 
   render() {
-    const { host, loggedIn } = this.props
+    const { t, host, loggedIn } = this.props
     return (
       <Frame loggedIn={loggedIn}>
-        <h1>Preview</h1>
-        <p>Below is a preview of the display as it will appear on the TV.</p>
+        <h1>{t('preview.title')}</h1>
+        <p>{t('preview.comment')}</p>
         <div className='preview'>
           <div className='content'>
             <Display host={host} display={display.id} />
@@ -57,4 +60,4 @@ class Preview extends React.Component {
     )
   }
 }
-export default protect(view(Preview))
+export default protect(withTranslation()(view(Preview)))

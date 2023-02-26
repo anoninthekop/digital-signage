@@ -1,6 +1,9 @@
 import React from 'react'
 import { view } from 'react-easy-state'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 import Frame from '../components/Admin/Frame.js'
 import ScreenList from '../components/Admin/ScreenList.js'
 import Dialog from '../components/Dialog.js'
@@ -29,15 +32,15 @@ class Screens extends React.Component {
   }
 
   render() {
-    const { loggedIn } = this.props
+    const { t, loggedIn } = this.props
     return (
       <Frame loggedIn={loggedIn}>
-        <h1>Screens</h1>
+        <h1>{t('screen.title')}</h1>
         <div className='wrapper'>
           <ScreenList ref={this.screenList} />
           <Dialog />
           <Button
-            text={'+ Add new screen'}
+            text={t('screen.button')}
             color={'#8bc34a'}
             onClick={this.add}
             style={{ marginLeft: 0, width: '100%' }}
@@ -62,4 +65,4 @@ class Screens extends React.Component {
   }
 }
 
-export default protect(view(Screens))
+export default protect(withTranslation()(view(Screens)))
