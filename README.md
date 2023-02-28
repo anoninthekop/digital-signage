@@ -43,7 +43,7 @@ npm run dev
 5. Create demo account
 
 ```html
-http://localhost:3001/demo
+http://localhost:3001/api/v1/user/demo
 ```
 (username: **demo**, password: **demo**)
 
