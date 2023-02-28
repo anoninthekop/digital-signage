@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const getSlides = (slideshow, host = '') => {
+  console.debug('SlideShow : ', slideshow)
   return axios.get(host + '/api/v1/slideshow/' + slideshow + '/slides').then(res => {
     if (res && res.data) {
       return res.data

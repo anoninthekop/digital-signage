@@ -4,7 +4,7 @@ class EmptyWidgetOptions extends React.Component {
   render() {
     return (
       <div className={'widget'}>
-        This widget has no options.
+        {t('widgets.emptywidget')}
         <style jsx>
           {`
             .widget {

@@ -5,7 +5,11 @@ import _ from 'lodash'
 import { view } from 'react-easy-state'
 
 // i18next
-import { withTranslation } from 'react-i18next'
+//import { withTranslation } from 'react-i18next'
+
+//{t('slideshow.title.name')}
+//{t('slideshow.title.placeholder')}
+//{t('slideshow.button')}
 
 import Frame from '../components/Admin/Frame.js'
 import SlideList from '../components/Admin/SlideList.js'
@@ -29,17 +33,21 @@ class Slideshow extends React.Component {
     this.state = { slideshow }
     this.slideList = React.createRef()
     this.dialog = React.createRef()
+    console.debug('slideshow : ', props)
   }
-
+  
   static async getInitialProps({ query, req }) {
     const id = query && query.id
+    console.debug('getInititialProps Query : ', query)
     const host =
       req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
     const slideshow = id && (await getSlideshow(id, host))
+    console.debug('getInit slideshow : ', slideshow)
     return { slideshow, host }
   }
 
   componentDidMount() {
+    console.debug('componentDidMount Props : ', this.props)
     const { displayId } = this.props
     display.setId(displayId)
   }
@@ -58,15 +66,16 @@ class Slideshow extends React.Component {
   }
 
   render() {
-    const { t, loggedIn } = this.props
+    const {loggedIn } = this.props
     const { slideshow } = this.state
+
     return (
       <Frame loggedIn={loggedIn}>
-        <h1 className='title'>{t('slideshow.title.name')} : </h1>{' '}
+        <h1 className='title'>t : </h1>{' '}
         <div className='editable-title'>
           <input
             className='input'
-            placeholder={t('slideshow.title.placeholder')}
+            placeholder=''
             value={slideshow && slideshow.title}
             onChange={event => {
               const target = event.target
@@ -100,7 +109,7 @@ class Slideshow extends React.Component {
             ref={this.dialog}
           />
           <Button
-            text={t('slideshow.button')}
+            text=''
             color='#7bc043'
             style={{ flex: 1, margin: 0, width: '100%', marginTop: 20 }}
             onClick={this.openAddDialog}
@@ -154,4 +163,4 @@ class Slideshow extends React.Component {
   }
 }
 
-export default protect(withTranslation()(view(Slideshow)))
+export default protect(view(Slideshow))

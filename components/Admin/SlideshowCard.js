@@ -12,6 +12,7 @@ import { display } from '../../stores'
 class SlideshowCard extends Component {
   render() {
     const { value, refresh = () => {} } = this.props
+    console.log('SlideshowCard Props : ', this.props)
     return (
       <Link href={'/slideshow/' + value._id + '?display=' + display.id}>
         <div className='card'>

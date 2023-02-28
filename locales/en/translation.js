@@ -65,5 +65,8 @@ export const ENGLISH = {
       logout: '   Logout',
       online: 'online'
     },
+    widgets: {
+      emptywidget: 'This widget has no options.'
+    }
 
   }

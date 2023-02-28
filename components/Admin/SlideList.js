@@ -49,14 +49,16 @@ const SortableList = SortableContainer(({ items, refresh }) => {
 class SlideList extends Component {
   constructor(props) {
     super(props)
-
+    console.debug('Slidelist propr : ', props)
     this.state = {
       slides: null
     }
   }
 
   componentDidMount() {
+
     const { slideshow } = this.props
+    console.debug('SlideList : ', this.props)
     getSlides(slideshow).then(slides => {
       this.setState({
         slides: slides
