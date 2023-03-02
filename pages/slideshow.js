@@ -4,13 +4,6 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
 import { view } from 'react-easy-state'
 
-// i18next
-//import { withTranslation } from 'react-i18next'
-
-//{t('slideshow.title.name')}
-//{t('slideshow.title.placeholder')}
-//{t('slideshow.button')}
-
 import Frame from '../components/Admin/Frame.js'
 import SlideList from '../components/Admin/SlideList.js'
 import SlideEditDialog from '../components/Admin/SlideEditDialog'
@@ -33,21 +26,17 @@ class Slideshow extends React.Component {
     this.state = { slideshow }
     this.slideList = React.createRef()
     this.dialog = React.createRef()
-    console.debug('slideshow : ', props)
   }
   
   static async getInitialProps({ query, req }) {
     const id = query && query.id
-    console.debug('getInititialProps Query : ', query)
     const host =
       req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
     const slideshow = id && (await getSlideshow(id, host))
-    console.debug('getInit slideshow : ', slideshow)
     return { slideshow, host }
   }
 
   componentDidMount() {
-    console.debug('componentDidMount Props : ', this.props)
     const { displayId } = this.props
     display.setId(displayId)
   }
