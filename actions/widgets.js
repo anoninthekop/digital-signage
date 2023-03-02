@@ -21,7 +21,6 @@ export const deleteWidget = (id, host = '') => {
 }
 
 export const updateWidget = (id, data, host = '') => {
-  console.log('updateWidget : ', id, data, host)
   return axios.put(host + '/api/v1/widgets/' + id, data)
 }
 
