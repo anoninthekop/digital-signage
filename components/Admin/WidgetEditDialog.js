@@ -32,6 +32,7 @@ class WidgetEditDialog extends React.Component {
   saveData = () => {
     const { id } = this.props
     const { data } = this.state
+    console.debug('saveData - WidgetEditDialog : ', data)
     return updateWidget(id, { data }).then(() => {
       this.close()
     })

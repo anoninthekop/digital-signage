@@ -37,7 +37,7 @@ class AnnouncementContent extends Component {
       <div className='announce'>
         <div className='title'>
           <div className='icon'>
-            <FontAwesomeIcon icon={'exclamation-triangle'} size={'0.4x'} color={accentColor} />
+            <FontAwesomeIcon icon={'exclamation-triangle'} size={'xl'} color={accentColor} />
           </div>
           <span>Announcement</span>
         </div>

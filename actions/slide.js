@@ -50,6 +50,7 @@ export const addSlide = (slideshow, file, data, host = '') => {
 
 export const standaloneUpload = (file, host = '') => {
   const formData = new FormData()
+  console.debug('standAloneUpload : ', file, host)
   formData.append('data', file)
   return axios.post(host + '/api/v1/slide/standalone_upload', formData, {
     headers: {

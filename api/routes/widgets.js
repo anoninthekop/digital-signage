@@ -38,15 +38,22 @@ router
   //Update
   .put('/:id', (req, res, next) => {
     const { id } = req.params
-
     return Widget.findById(id)
       .then( widget => {
         if (!widget) return next(new Error('Widget not found'))
         const data = req.body
-        widget.x = data.x
-        widget.y = data.y
-        widget.w = data.w
-        widget.h = data.h
+        console.log('Put widget Route : ', data, ' Data : ', data.data )
+        if(!data.data){
+          console.debug('data.x', data.x)
+          widget.x = data.x
+          widget.y = data.y
+          widget.w = data.w
+          widget.h = data.h
+        } else {
+          console.debug('data.data', data.data)
+          widget.data = data.data
+        }
+        console.log('Put widget Route before save : ', widget )
         widget.save()
         .then(() => CommonHelper.broadcastUpdate(res.io))
         .then(() => {
