@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThLarge, faTh, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import GridLayout from 'react-grid-layout'
-import { view } from 'react-easy-state'
+import { view } from '@risingstack/react-easy-state'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 // i18next

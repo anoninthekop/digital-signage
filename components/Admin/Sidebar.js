@@ -16,7 +16,7 @@ import {
   faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons'
 import DropdownButton from '../DropdownButton'
-import { view } from 'react-easy-state'
+import { view } from '@risingstack/react-easy-state'
 
 // i18next
 import { withTranslation } from 'react-i18next'

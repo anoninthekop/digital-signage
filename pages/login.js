@@ -2,7 +2,7 @@ import { Component } from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTv, faCheck, faTimes, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
-import { view } from 'react-easy-state'
+import { view } from '@risingstack/react-easy-state'
 
 
 // i18next
