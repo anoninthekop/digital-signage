@@ -18,7 +18,9 @@ class ImageOptions extends Component {
     const { onChange = () => {} } = this.props
     if (name == 'upload') {
       name = 'url'
+      console.log('Value StandaloneUpload : ', value)
       const resp = await standaloneUpload(value)
+      console.debug('Data.url ', resp.data.url)
       value = resp.data.url
     }
     this.setState(

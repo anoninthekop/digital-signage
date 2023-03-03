@@ -2,7 +2,8 @@
  * Overloads the _document container from Next.js in order to add custom fonts
  */
 
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, { Html, Main, Head, NextScript } from 'next/document'
+//import Head from 'next/head'
 import { ServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
 
@@ -17,10 +18,9 @@ class AppDocument extends Document {
 
   render() {
     return (
-      <html>
+      <Html>
         <Head>
           <style>{'body { margin: 0 } /* custom! */'}</style>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta charSet='utf-8' />
           <link
             href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800'
@@ -33,7 +33,7 @@ class AppDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }
