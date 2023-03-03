@@ -4,15 +4,15 @@ import { view } from '@risingstack/react-easy-state'
 // i18next
 import { withTranslation } from 'react-i18next'
 
-import Frame from '../components/Admin/Frame.js'
-import ScreenList from '../components/Admin/ScreenList.js'
-import Dialog from '../components/Dialog.js'
-import { Button } from '../components/Form'
+import Frame from '../../components/Admin/Frame.js'
+import ScreenList from '../../components/Admin/ScreenList.js'
+import Dialog from '../../components/Dialog.js'
+import { Button } from '../../components/Form'
 
-import { addDisplay } from '../actions/display'
-import { protect } from '../helpers/auth.js'
+import { addDisplay } from '../../actions/display'
+import { protect } from '../../helpers/auth.js'
 
-import { display } from '../stores'
+import { display } from '../../stores'
 
 class Screens extends React.Component {
   constructor(props) {

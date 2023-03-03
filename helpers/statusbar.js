@@ -7,6 +7,7 @@ library.add(faGripVertical)
 library.add(faClock)
 library.add(faCalendarAlt)
 
+
 export const StatusBarElementTypes = {
   time: {
     name: 'time',

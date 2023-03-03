@@ -11,6 +11,7 @@ import 'react-resizable/css/styles.css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 export default class NextApp extends App {
+  /** 
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
     if (Component.getInitialProps) {
@@ -19,6 +20,7 @@ export default class NextApp extends App {
 
     return { pageProps }
   }
+  */
 
   render() {
     const { Component, pageProps } = this.props

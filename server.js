@@ -12,8 +12,11 @@ const Keys = require('./keys')
 
 const dev = Keys.ENVIRON !== 'PROD'
 const app = next({ dev })
+/*
 const routes = require('./routes')
-const handle = routes.getRequestHandler(app)
+*/
+const handle = app.getRequestHandler()
+
 
 const apiRoutes = require('./api/routes')
 const User = require('./api/models/User')
@@ -77,9 +80,11 @@ app
     server.use('/uploads', express.static('uploads'))
 
     // Next.js routes
+    
     server.get('*', (req, res) => {
       return handle(req, res)
     })
+    
 
     const finalServer = server.listen(Keys.PORT, err => {
       if (err) throw err
