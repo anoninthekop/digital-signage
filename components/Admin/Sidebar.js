@@ -16,7 +16,6 @@ import {
   faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons'
 import DropdownButton from '../DropdownButton'
-import { view } from '@risingstack/react-easy-state'
 
 // i18next
 import { withTranslation } from 'react-i18next'
@@ -246,4 +245,4 @@ class Sidebar extends Component {
   }
 }
 
-export default withRouter(withTranslation()(view(Sidebar)))
+export default withRouter(withTranslation()(Sidebar))

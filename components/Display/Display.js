@@ -7,7 +7,7 @@ import React from 'react'
 import GridLayout from 'react-grid-layout'
 import socketIOClient from 'socket.io-client'
 import _ from 'lodash'
-import { view } from '@risingstack/react-easy-state'
+import { withRouter } from 'next/router.js'
 
 import Frame from './Frame.js'
 import HeightProvider from '../Widgets/HeightProvider'
@@ -28,6 +28,7 @@ class Display extends React.Component {
       statusBar: DEFAULT_STATUS_BAR
     }
     this.throttledRefresh = _.debounce(this.refresh, 1500)
+
   }
 
   componentDidMount() {
@@ -42,7 +43,7 @@ class Display extends React.Component {
   }
 
   refresh = () => {
-    const { display } = this.props
+    const display = this.props.router.query.id || this.props.display
     return getDisplay(display).then(({ widgets = [], layout, statusBar = DEFAULT_STATUS_BAR }) => {
       this.setState({ widgets, layout, statusBar })
     })
@@ -59,7 +60,6 @@ class Display extends React.Component {
     }))
 
     const GridLayoutWithHeight = HeightProvider(GridLayout, this.container, layout)
-
     return (
       <Frame statusBar={statusBar}>
         <div className={'gridContainer'} ref={ref => (this.container = ref)}>
@@ -99,4 +99,4 @@ class Display extends React.Component {
   }
 }
 
-export default view(Display)
+export default withRouter(Display)

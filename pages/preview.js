@@ -1,5 +1,4 @@
 import React from 'react'
-import { view } from '@risingstack/react-easy-state'
 
 // i18next
 import { withTranslation } from 'react-i18next'
@@ -20,14 +19,14 @@ class Preview extends React.Component {
   }
 
   render() {
-    const { t, host, loggedIn } = this.props
+    const { t, host, loggedIn, displayId } = this.props
     return (
       <Frame loggedIn={loggedIn}>
         <h1>{t('preview.title')}</h1>
         <p>{t('preview.comment')}</p>
         <div className='preview'>
           <div className='content'>
-            <Display host={host} display={display.id} />
+            <Display host={host} display={displayId} />
           </div>
         </div>
         <style jsx>
@@ -60,4 +59,4 @@ class Preview extends React.Component {
     )
   }
 }
-export default protect(withTranslation()(view(Preview)))
+export default protect(withTranslation()(Preview))

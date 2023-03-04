@@ -2,7 +2,6 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
-import { view } from '@risingstack/react-easy-state'
 
 import Frame from '../../../components/Admin/Frame.js'
 import SlideList from '../../../components/Admin/SlideList.js'
@@ -98,7 +97,7 @@ class Slideshow extends React.Component {
             ref={this.dialog}
           />
           <Button
-            text=''
+            text='+ Add Slide'
             color='#7bc043'
             style={{ flex: 1, margin: 0, width: '100%', marginTop: 20 }}
             onClick={this.openAddDialog}
@@ -152,4 +151,4 @@ class Slideshow extends React.Component {
   }
 }
 
-export default protect(view(Slideshow))
+export default protect(Slideshow)

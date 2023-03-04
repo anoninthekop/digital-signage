@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faImages } from '@fortawesome/free-regular-svg-icons'
 import { faTrash, faPlay } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import { view } from '@risingstack/react-easy-state'
 
 import { deleteSlideshow } from '../../actions/slideshow'
 import { display } from '../../stores'
@@ -12,7 +11,6 @@ import { display } from '../../stores'
 class SlideshowCard extends Component {
   render() {
     const { value, refresh = () => {} } = this.props
-    console.log('SlideshowCard Props : ', this.props)
     return (
       <Link href={'/slideshow/' + value._id + '?display=' + display.id}>
         <div className='card'>
@@ -164,4 +162,4 @@ class SlideshowCard extends Component {
   }
 }
 
-export default view(SlideshowCard)
+export default SlideshowCard

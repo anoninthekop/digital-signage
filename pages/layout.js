@@ -2,7 +2,6 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThLarge, faTh, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import GridLayout from 'react-grid-layout'
-import { view } from '@risingstack/react-easy-state'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 // i18next
@@ -270,4 +269,4 @@ class Layout extends React.Component {
   }
 }
 
-export default (protect(withTranslation()(view(Layout))))
+export default (protect(withTranslation()(Layout)))

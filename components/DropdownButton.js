@@ -22,10 +22,9 @@ class DropdownButton extends Component {
 
   showMenu(event) {
     event.preventDefault()
-
-    this.setState({ showMenu: true }, () => {
-      document && document.addEventListener('click', this.closeMenu)
-    })
+    this.setState(prevState => ({
+      showMenu: !prevState.showMenu
+    }))
   }
 
   closeMenu(event, force = false) {

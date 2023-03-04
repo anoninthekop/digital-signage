@@ -3,7 +3,6 @@
  * sidebar and content on the right)
  */
 
-import { view } from '@risingstack/react-easy-state'
 
 import Sidebar from './Sidebar'
 import { display } from '../../stores'
@@ -29,4 +28,4 @@ const Frame = props => (
   </div>
 )
 
-export default view(Frame)
+export default Frame
