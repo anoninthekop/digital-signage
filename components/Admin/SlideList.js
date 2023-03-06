@@ -55,7 +55,7 @@ class SlideList extends Component {
   }
 
   componentDidMount() {
-
+    console.debug('DidMount')
     const { slideshow } = this.props
     getSlides(slideshow).then(slides => {
       this.setState({

@@ -19,10 +19,10 @@ export const FRENCH = {
       }
     },
     index: {
-      home: 'Le serveur fonctionne en arrière plan',
+      home: 'Le serveur fonctionne correctement en arrière plan',
       button: {
         admin : 'Administration',
-        display : 'Ecran'
+        display : 'Ecrans'
       }
     },
     layout: {

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { view } from '@risingstack/react-easy-state'
+
 // i18next
 import { withTranslation } from 'react-i18next'
 
@@ -64,4 +66,4 @@ class Slideshows extends React.Component {
   }
 }
 
-export default protect(withTranslation()(Slideshows))
+export default protect(withTranslation()(view(Slideshows)))

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { view } from '@risingstack/react-easy-state'
+
 // i18next
 import { withTranslation } from 'react-i18next'
 
@@ -59,4 +61,4 @@ class Preview extends React.Component {
     )
   }
 }
-export default protect(withTranslation()(Preview))
+export default protect(withTranslation()(view(Preview)))

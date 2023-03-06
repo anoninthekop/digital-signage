@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTv, faCheck, faTimes, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 
+import { view } from '@risingstack/react-easy-state'
 
 // i18next
 import { withTranslation } from 'react-i18next'
@@ -104,7 +105,7 @@ class Login extends Component {
               {t('login.alert.info')}
               </span>
             </div>
-            <label for='username'>{t('login.username.name')}</label>
+            <label htmlFor='username'>{t('login.username.name')}</label>
             <input
               type='text'
               className='username'
@@ -112,7 +113,7 @@ class Login extends Component {
               placeholder= {t('login.username.placeholder')}
               onChange={this.usernameChangeHandler}
             />
-            <label for='password'>{t('login.password.name')}</label>
+            <label htmlFor='password'>{t('login.password.name')}</label>
             <input
               type='password'
               className='password'
@@ -242,4 +243,4 @@ class Login extends Component {
   }
 }
 
-export default withTranslation() (Login)
+export default withTranslation() (view(Login))

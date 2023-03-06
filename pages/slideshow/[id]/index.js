@@ -3,6 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
 
+import { view } from '@risingstack/react-easy-state'
+
+// i18next
+import { withTranslation } from 'react-i18next'
+
 import Frame from '../../../components/Admin/Frame.js'
 import SlideList from '../../../components/Admin/SlideList.js'
 import SlideEditDialog from '../../../components/Admin/SlideEditDialog'
@@ -59,7 +64,7 @@ class Slideshow extends React.Component {
 
     return (
       <Frame loggedIn={loggedIn}>
-        <h1 className='title'>t : </h1>{' '}
+        <h1 className='title'>{' '}t : </h1>{' '}
         <div className='editable-title'>
           <input
             className='input'
@@ -151,4 +156,4 @@ class Slideshow extends React.Component {
   }
 }
 
-export default protect(Slideshow)
+export default protect(withTranslation() (view(Slideshow)))

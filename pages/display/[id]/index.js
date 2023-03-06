@@ -4,6 +4,7 @@
  */
 
 import React from 'react'
+import { view } from '@risingstack/react-easy-state'
 
 import Display from '../../../components/Display/Display'
 import { display } from '../../../stores'
@@ -56,4 +57,4 @@ class DisplayPage extends React.Component {
   }
 }
 
-export default DisplayPage
+export default view(DisplayPage)

@@ -3,7 +3,8 @@ import Link from 'next/link'
 import Router from 'next/router'
 import DropdownButton from '../components/DropdownButton'
 
-
+// i18next
+import { withTranslation } from 'react-i18next'
 
 import { getDisplays } from '../actions/display'
 
@@ -16,31 +17,25 @@ class Index extends React.Component {
 
   }
 
-  static async getInitialProps({ req }) {
-    const host =
-      req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
-    const displayList = await getDisplays(host)
-    return { displays: displayList, host: host }
-  }
-
   navigateToDisplay = id => {
     Router.push('/display/' + id)
   }
 
   render() {
     const { displays = []} = this.state
+    const { t } = this.props
 
     return (
       <div className='home'>
-        <p>The Digital Signage server is running in the background.</p>
+        <p>{t('index.home')}</p>
         <div className='btn-group'>
           <Link href='/layout' style={{ margin: 20 }}>
-            <div className='btn admin'>Admin Home</div>
+            <div className='btn admin'>{t('index.button.admin')}</div>
           </Link>
           <div style={{ margin: 20 }}>
             <DropdownButton
               icon='chevron-down'
-              text='Display Home'
+              text={t('index.button.display')}
               style={styles.btn}
               onSelect={this.navigateToDisplay}
               choices={displays.map(display => ({
@@ -104,4 +99,12 @@ const styles = {
   }
 }
 
-export default Index //withTranslation()
+export async function getServerSideProps({req}){
+  const host =
+    req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
+  const displayList = await getDisplays(host)
+  return { props: {displays: displayList, host: host }}
+
+}
+
+export default withTranslation()(Index)
