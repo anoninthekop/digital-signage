@@ -156,4 +156,4 @@ class Slideshow extends React.Component {
   }
 }
 
-export default protect(withTranslation() (view(Slideshow)))
+export default protect( (view(Slideshow)))

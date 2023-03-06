@@ -33,6 +33,7 @@ class Upload extends Component {
           ? window.webkitURL.createObjectURL(acceptedFiles[acceptedFiles.length - 1])
           : null
     })
+    console.debug('Upload : ', file)
     this.setState({ lastFile: file })
   }
 

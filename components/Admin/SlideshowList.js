@@ -24,6 +24,7 @@ class SlideshowList extends Component {
       this.setState({
         slideshows
       })
+      console.debug('getSlideshows ', slideshows)
     })
   }
 
@@ -33,6 +34,7 @@ class SlideshowList extends Component {
       <div className={'list'}>
         {slideshows
           ? slideshows.map((value, index) => (
+              console.debug('slideshows value : ', value),
               <SlideshowCard
                 key={`item-${index}`}
                 index={index}

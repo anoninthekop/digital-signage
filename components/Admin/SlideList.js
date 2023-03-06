@@ -55,7 +55,7 @@ class SlideList extends Component {
   }
 
   componentDidMount() {
-    console.debug('DidMount')
+    console.debug('DidMount Props : ', this.props)
     const { slideshow } = this.props
     getSlides(slideshow).then(slides => {
       this.setState({
@@ -78,6 +78,7 @@ class SlideList extends Component {
 
   refresh = () => {
     const { slideshow } = this.props
+    console.debug('Refresh SlideList ', slideshow)
     return getSlides(slideshow).then(slides => {
       return this.setState({
         slides: slides
