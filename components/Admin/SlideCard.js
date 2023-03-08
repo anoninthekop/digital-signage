@@ -20,8 +20,6 @@ class SlideCard extends Component {
   render() {
     const { value, refresh = () => {} } = this.props
     const { loading = false } = this.state
-    console.debug('Render : ', this.props)
-
     return (
       <div className='card'>
         <div className='order'>{value.order}</div>

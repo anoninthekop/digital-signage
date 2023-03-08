@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {createRef} from 'react'
 import ReactDom from 'react-dom'
 import animateScrollTo from 'animated-scroll-to'
 
@@ -8,9 +8,11 @@ class AutoScroll extends React.Component {
     this.container = React.createRef()
   }
 
+  inputRef = createRef(null);
+
   componentDidMount() {
     if (!this.container || !this.container.current) return
-    const containerNode = ReactDom.findDOMNode(this.container.current)
+    const containerNode = this.inputRef.current
     if (!containerNode) return
 
     const { duration = 3000 } = this.props

@@ -24,10 +24,11 @@ class AppDocument extends Document {
           <style>{'body { margin: 0 } /* custom! */'}</style>
           <meta charSet='utf-8' />
           <link
-            href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800'
+            href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800
+            &display=optional'
             rel='stylesheet'
           />
-          <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js' />
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js' async />
           {this.props.styleTags}
         </Head>
         <body>

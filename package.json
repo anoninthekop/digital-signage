@@ -8,7 +8,7 @@
     "dev": "ENVIRON=DEV node server.js",
     "prod": "ENVIRON=PROD node server.js",
     "build": "next build",
-    "lint": "eslint --color ./ *.js",
+    "lint": "next lint",
     "start": "node server.js",
     "test": "echo \"No test specified yet.\" && exit 0",
     "update": "git pull && npm i && npm run build",
@@ -56,7 +56,7 @@
     "makeconf": "^1.4.4",
     "mongoose": "^6.10.0",
     "multer": "^1.4.5-lts.1",
-    "next": "^11.1.4",
+    "next": "^12.3.4",
     "next-cookies": "^1.1.2",
     "nookies": "^2.0.5",
     "passport": "^0.5.3",
@@ -86,6 +86,7 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "eslint-config-next": "^13.2.3"
   }
 }

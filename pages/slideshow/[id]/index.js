@@ -16,7 +16,7 @@ import Button from '../../../components/Form/Button.js'
 import Dialog from '../../../components/Dialog.js'
 
 import { getSlideshow, updateSlideshow } from '../../../actions/slideshow'
-import { protect } from '../../../helpers/auth.js'
+//import { protect } from '../../../helpers/auth.js'
 import { display } from '../../../stores'
 
 const updateSlideshowThrottled = _.debounce((id, data) => {

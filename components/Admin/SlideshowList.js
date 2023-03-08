@@ -24,7 +24,6 @@ class SlideshowList extends Component {
       this.setState({
         slideshows
       })
-      console.debug('getSlideshows ', slideshows)
     })
   }
 
@@ -34,7 +33,6 @@ class SlideshowList extends Component {
       <div className={'list'}>
         {slideshows
           ? slideshows.map((value, index) => (
-              console.debug('slideshows value : ', value),
               <SlideshowCard
                 key={`item-${index}`}
                 index={index}
@@ -45,7 +43,7 @@ class SlideshowList extends Component {
           : Array(4)
               .fill()
               .map(() => (
-                <ContentLoader height={120} width={640}>
+                <ContentLoader key={index} height={120} width={640}>
                   <rect x='0' y='0' rx='5' ry='5' width='100%' height='80' />
                 </ContentLoader>
               ))}
