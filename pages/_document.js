@@ -8,6 +8,7 @@ import { ServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
 
 class AppDocument extends Document {
+  
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet()
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))

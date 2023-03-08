@@ -31,14 +31,6 @@ class Slideshow extends React.Component {
     this.slideList = React.createRef()
     this.dialog = React.createRef()
   }
-  
-  static async getInitialProps({ query, req }) {
-    const id = query && query.id
-    const host =
-      req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
-    const slideshow = id && (await getSlideshow(id, host))
-    return { slideshow, host }
-  }
 
   componentDidMount() {
     const { displayId } = this.props
@@ -59,16 +51,16 @@ class Slideshow extends React.Component {
   }
 
   render() {
-    const {loggedIn } = this.props
+    const {t, loggedIn } = this.props
     const { slideshow } = this.state
 
     return (
       <Frame loggedIn={loggedIn}>
-        <h1 className='title'>{' '}t : </h1>{' '}
+        <h1 className='title'>{t('slideshow.title.name')} : </h1>{' '}
         <div className='editable-title'>
           <input
             className='input'
-            placeholder=''
+            placeholder={t('slideshow.title.placeholder')}
             value={slideshow && slideshow.title}
             onChange={event => {
               const target = event.target
@@ -102,7 +94,7 @@ class Slideshow extends React.Component {
             ref={this.dialog}
           />
           <Button
-            text='+ Add Slide'
+            text={t('slideshow.button')}
             color='#7bc043'
             style={{ flex: 1, margin: 0, width: '100%', marginTop: 20 }}
             onClick={this.openAddDialog}
@@ -156,4 +148,12 @@ class Slideshow extends React.Component {
   }
 }
 
-export default protect( (view(Slideshow)))
+export async function getServerSideProps({query,req}){
+  const id = query && query.id
+  const host =
+    req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
+  const slideshow = id && (await getSlideshow(id, host))
+  return { props: {slideshow: slideshow, host: host }}
+}
+
+export default withTranslation() (view(Slideshow))
