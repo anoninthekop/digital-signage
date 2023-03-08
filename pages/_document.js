@@ -5,10 +5,10 @@
 import Document, { Html, Main, Head, NextScript } from 'next/document'
 //import Head from 'next/head'
 import { ServerStyleSheet } from 'styled-components'
-import flush from 'styled-jsx/server'
+import flush from 'styled-jsx'
 
 class AppDocument extends Document {
-  
+  /**
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet()
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
@@ -16,7 +16,7 @@ class AppDocument extends Document {
     const styles = flush()
     return { ...page, styleTags, styles }
   }
-
+*/
   render() {
     return (
       <Html>

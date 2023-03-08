@@ -9,17 +9,17 @@ import { view } from '@risingstack/react-easy-state'
 import Display from '../../../components/Display/Display'
 import { display } from '../../../stores'
 
+export async function getServerSideProps({query,req}){
+  const displayId = query && query.display
+  const host =
+    req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
+  return { props: {displayId: displayId || null, host: host || null }}
+}
+
+
 class DisplayPage extends React.Component {
   constructor(props) {
     super(props)
-  }
-
-  static async getInitialProps({ query, req }) {
-    const displayId = query && query.display
-    const host =
-      req && req.headers && req.headers.host ? 'http://' + req.headers.host : window.location.origin
-
-    return { host, displayId }
   }
 
   componentDidMount() {
