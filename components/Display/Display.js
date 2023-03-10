@@ -28,11 +28,11 @@ class Display extends React.Component {
       statusBar: DEFAULT_STATUS_BAR
     }
     this.throttledRefresh = _.debounce(this.refresh, 1500)
-
   }
 
   componentDidMount() {
     this.refresh()
+    console.debug('Widgets Mount : ', this.state.widgets)
     const { host = 'http://localhost' } = this.props
     const socket = socketIOClient(host)
     socket.on('admin:update', () => this.throttledRefresh())
@@ -42,24 +42,33 @@ class Display extends React.Component {
     if (prevProps.display != this.props.display) this.refresh()
   }
 
-  refresh = () => {
+  refresh =  () => {
+    console.log('Props : ', this.props)
     const display = this.props.router.query.id || this.props.display
-    return getDisplay(display).then(({ widgets = [], layout, statusBar = DEFAULT_STATUS_BAR }) => {
-      this.setState({ widgets, layout, statusBar })
+    return getDisplay(display).then(({widgets = [], layout, statusBar = DEFAULT_STATUS_BAR}) => {
+      console.debug('Widgets Before : ', widgets)
+      this.setState({ 
+        widgets: widgets, 
+        layout: layout, 
+        statusBar: statusBar 
+      })
     })
+    return 
   }
 
   render() {
     const { widgets, layout, statusBar } = this.state
-    const widgetLayout = widgets.map(widget => ({
+    console.debug('Widgets Render : ', this.state)
+    
+    const widgetLayout = this.state.widgets.map((widget) => ({
       i: widget._id,
       x: widget.x || 0,
       y: widget.y || 0,
       w: widget.w || 1,
       h: widget.h || 1
     }))
-
-    const GridLayoutWithHeight = HeightProvider(GridLayout, this.container, layout)
+    
+    const GridLayoutWithHeight = HeightProvider(GridLayout, this.container, widgetLayout)
     return (
       <Frame statusBar={statusBar}>
         <div className={'gridContainer'} ref={ref => (this.container = ref)}>
@@ -67,11 +76,12 @@ class Display extends React.Component {
             className='layout'
             isDraggable={false}
             isResizable={false}
-            layout={widgetLayout}
+            layout={widgets}
             cols={6}
             margin={layout == 'spaced' ? [10, 10] : [0, 0]}
           >
             {widgets.map(widget => {
+              console.debug('Widget render Map : ', widget)
               const Widget = Widgets[widget.type] ? Widgets[widget.type].Widget : EmptyWidget
               return (
                 <div key={widget._id} className={'widget'}>
