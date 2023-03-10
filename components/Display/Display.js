@@ -81,8 +81,8 @@ class Display extends React.Component {
             margin={layout == 'spaced' ? [10, 10] : [0, 0]}
           >
             {widgets.map(widget => {
-              console.debug('Widget render Map : ', widget)
               const Widget = Widgets[widget.type] ? Widgets[widget.type].Widget : EmptyWidget
+              console.debug('Widget render Map : ', widget)
               return (
                 <div key={widget._id} className={'widget'}>
                   <Widget data={widget.data} />

@@ -10,41 +10,36 @@ import Web from './web'
 
 const widgets = {}
 
-const list = new Web()
-
 for (const widget of widgetList) {
-  /**
+  
   switch (widget) {
     case 'slideshow':
-      widgets[widget] = new slideshow()
+      widgets[widget] = Slideshow
       break;
 
     case 'weather':
-      widgets[widget] = new Weather()
+      widgets[widget] = Weather
       break;
     case 'congrats':
-      widgets[widget] = new Congrats()
+      widgets[widget] = Congrats
       break;
     case 'youtube':
-      widgets[widget] = new YouTube()
+      widgets[widget] = YouTube
       break;
     case 'web':
-      widgets[widget] = new Web()
+      widgets[widget] = Web
       break;
     case 'image':
-      widgets[widget] = new Image()
+      widgets[widget] = Image
       break;
     case 'list':
-      widgets[widget] = new List()
+      widgets[widget] = List
       break;
     case 'announcement':
-      widgets[widget] = new Announcement()
+      widgets[widget] = Announcement
       break;
       
-  }*/
+  }
 }
-
-
-console.debug('Widgets List : ', widgets)
 
 module.exports = widgets

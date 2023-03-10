@@ -3,8 +3,8 @@ import WebContent from './src/WebContent'
 import WebOptions from './src/WebOptions'
 
 export default class Web extends BaseWidget {
-  constructor() {
-    super(definition)
+  constructor(props) {
+    super(props)
       this.name= 'Web',
       this.version= '0.1',
       this.icon= 'globe',
