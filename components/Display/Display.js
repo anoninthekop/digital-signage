@@ -76,7 +76,7 @@ class Display extends React.Component {
             className='layout'
             isDraggable={false}
             isResizable={false}
-            layout={widgets}
+            layout={widgetLayout}
             cols={6}
             margin={layout == 'spaced' ? [10, 10] : [0, 0]}
           >

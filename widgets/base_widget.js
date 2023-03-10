@@ -3,7 +3,7 @@ import EmptyWidgetOptions from '../components/Widgets/EmptyWidgetOptions'
 
 const REQUIRED_DEF_FIELDS = ['name', 'version', 'icon']
 
-export default class BaseWidget {
+module.exports =  class BaseWidget {
   constructor(definition) {
     for (const reqField of REQUIRED_DEF_FIELDS) {
       if (!(reqField in definition)) {

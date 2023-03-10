@@ -2,7 +2,7 @@ import BaseWidget from '../base_widget'
 import YoutubeContent from './src/YoutubeContent'
 import YoutubeOptions from './src/YoutubeOptions'
 
-export default class Web extends BaseWidget {
+module.exports = class Web extends BaseWidget {
   constructor() {
     super({
       name: 'Youtube',

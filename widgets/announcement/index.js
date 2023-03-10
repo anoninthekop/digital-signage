@@ -2,7 +2,7 @@ import BaseWidget from '../base_widget'
 import AnnouncementContent from './src/AnnouncementContent'
 import AnnouncementOptions from './src/AnnouncementOptions'
 
-export default class Announcement extends BaseWidget {
+module.exports = class Announcement extends BaseWidget {
   constructor() {
     super({
       name: 'Announcement',

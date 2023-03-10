@@ -2,7 +2,7 @@ import BaseWidget from '../base_widget'
 import CongratsContent from './src/CongratsContent'
 import CongratsOptions from './src/CongratsOptions'
 
-export default class Congrats extends BaseWidget {
+module.exports = class Congrats extends BaseWidget {
   constructor() {
     super({
       name: 'Congratulations',

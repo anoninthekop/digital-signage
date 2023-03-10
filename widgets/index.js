@@ -14,29 +14,29 @@ for (const widget of widgetList) {
   
   switch (widget) {
     case 'slideshow':
-      widgets[widget] = Slideshow
+      widgets[widget] = new Slideshow()
       break;
 
     case 'weather':
-      widgets[widget] = Weather
+      widgets[widget] = new Weather()
       break;
     case 'congrats':
-      widgets[widget] = Congrats
+      widgets[widget] = new Congrats()
       break;
     case 'youtube':
-      widgets[widget] = YouTube
+      widgets[widget] = new YouTube()
       break;
     case 'web':
-      widgets[widget] = Web
+      widgets[widget] = new Web()
       break;
     case 'image':
-      widgets[widget] = Image
+      widgets[widget] = new Image()
       break;
     case 'list':
-      widgets[widget] = List
+      widgets[widget] = new List()
       break;
     case 'announcement':
-      widgets[widget] = Announcement
+      widgets[widget] = new Announcement()
       break;
       
   }

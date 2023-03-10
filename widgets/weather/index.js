@@ -2,7 +2,7 @@ import BaseWidget from '../base_widget'
 import WeatherContent from './src/WeatherContent'
 import WeatherOptions from './src/WeatherOptions'
 
-export default class Weather extends BaseWidget {
+module.exports = class Weather extends BaseWidget {
   constructor() {
     super({
       name: 'Weather',

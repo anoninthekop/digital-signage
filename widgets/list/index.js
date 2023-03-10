@@ -2,7 +2,7 @@ import BaseWidget from '../base_widget'
 import ListContent from './src/ListContent'
 import ListOptions from './src/ListOptions'
 
-export default class List extends BaseWidget {
+module.exports = class List extends BaseWidget {
   constructor() {
     super({
       name: 'List',

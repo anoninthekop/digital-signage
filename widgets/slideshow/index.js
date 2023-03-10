@@ -2,7 +2,7 @@ import BaseWidget from '../base_widget'
 import SlideshowContent from './src/Slideshow.js'
 import SlideshowOptions from './src/SlideshowOptions.js'
 
-export default class Slideshow extends BaseWidget {
+module.exports = class Slideshow extends BaseWidget {
   constructor() {
     super({
       name: 'Slideshow',
