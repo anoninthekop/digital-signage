@@ -32,7 +32,6 @@ class Display extends React.Component {
 
   componentDidMount() {
     this.refresh()
-    console.debug('Widgets Mount : ', this.state.widgets)
     const { host = 'http://localhost' } = this.props
     const socket = socketIOClient(host)
     socket.on('admin:update', () => this.throttledRefresh())
@@ -43,10 +42,8 @@ class Display extends React.Component {
   }
 
   refresh =  () => {
-    console.log('Props : ', this.props)
     const display = this.props.router.query.id || this.props.display
     return getDisplay(display).then(({widgets = [], layout, statusBar = DEFAULT_STATUS_BAR}) => {
-      console.debug('Widgets Before : ', widgets)
       this.setState({ 
         widgets: widgets, 
         layout: layout, 
@@ -57,9 +54,7 @@ class Display extends React.Component {
   }
 
   render() {
-    const { widgets, layout, statusBar } = this.state
-    console.debug('Widgets Render : ', this.state)
-    
+    const { widgets, layout, statusBar } = this.state   
     const widgetLayout = this.state.widgets.map((widget) => ({
       i: widget._id,
       x: widget.x || 0,
@@ -82,7 +77,6 @@ class Display extends React.Component {
           >
             {widgets.map(widget => {
               const Widget = Widgets[widget.type] ? Widgets[widget.type].Widget : EmptyWidget
-              console.debug('Widget render Map : ', widget)
               return (
                 <div key={widget._id} className={'widget'}>
                   <Widget data={widget.data} />

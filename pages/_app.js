@@ -6,9 +6,11 @@ import { I18nextProvider } from 'react-i18next'
 
 
 
+
 import '../styles/GridLayoutStyles.css'
 import 'react-resizable/css/styles.css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { display } from '../stores'
 
 export default class NextApp extends App {
 
@@ -19,9 +21,11 @@ export default class NextApp extends App {
         <Head>
           <meta name='viewport' content='width=device-width, initial-scale=1' />
         </Head>
+
         <I18nextProvider i18n={i18n}>
           <Component {...pageProps} />
         </I18nextProvider>
+
       </>
     )
   }
