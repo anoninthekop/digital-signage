@@ -7,8 +7,9 @@ import { withTranslation } from 'react-i18next'
 
 import Frame from '../components/Admin/Frame.js'
 import Display from '../components/Display/Display.js'
-import { protect } from '../helpers/auth.js'
 import { display } from '../stores'
+import { withRouter } from 'next/router.js'
+import { withSession } from '../lib/auth/auth.js'
 
 class Preview extends React.Component {
   constructor(props) {
@@ -16,12 +17,16 @@ class Preview extends React.Component {
   }
 
   componentDidMount() {
-    const { displayId } = this.props
+    //const { displayId } = this.props
+    const displayId = this.props.router.query.display
+    console.log('displayId : ', displayId)
     display.setId(displayId)
   }
 
   render() {
-    const { t, host, loggedIn, displayId } = this.props
+    const { t, host, session} = this.props
+    const loggedIn = session.status ==='authenticated'
+    const displayId = this.props.router.query.display
     return (
       <Frame loggedIn={loggedIn}>
         <h1>{t('preview.title')}</h1>
@@ -61,4 +66,5 @@ class Preview extends React.Component {
     )
   }
 }
-export default protect(withTranslation()(view(Preview)))
+
+export default withRouter(withTranslation() (withSession(view(Preview))))

@@ -20,9 +20,11 @@ import DropdownButton from '../DropdownButton'
 // i18next
 import { withTranslation } from 'react-i18next'
 
-import { logout } from '../../helpers/auth'
 import { display } from '../../stores'
 import { getDisplays } from '../../actions/display'
+import { signOut } from "next-auth/react"
+import { withSession } from '../../lib/auth/auth'
+
 
 class Sidebar extends Component {
   constructor(props) {
@@ -40,14 +42,16 @@ class Sidebar extends Component {
     })
   }
 
-  navigateToAdmin = id => {
+  navigateToAdmin = async id => {
     Router.push('/layout?display=' + id)
-    display.setId(id)
+    await display.setId(id)
   }
 
   render() {
-    const { t, router, loggedIn } = this.props
+    const { t, router, session} = this.props
     const { displays } = this.state
+    console.log('SideBar : ', session.status)
+    const loggedIn = session.status === 'authenticated'
     const menu = loggedIn
       ? [
           {
@@ -125,7 +129,7 @@ class Sidebar extends Component {
           ))}
         </ul>
         {loggedIn && (
-          <div className='logout' onClick={() => logout()}>
+          <div className='logout' onClick={() => signOut({callbackUrl: '/login'})}>
             <a>
               <FontAwesomeIcon icon={faSignOutAlt} fixedWidth />
               <span className={'text'}>{t('sidebar.logout')}</span>
@@ -245,4 +249,5 @@ class Sidebar extends Component {
   }
 }
 
-export default withRouter(withTranslation()(Sidebar))
+
+export default withRouter(withTranslation()(withSession(Sidebar)))

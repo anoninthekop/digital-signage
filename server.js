@@ -80,8 +80,12 @@ app
     server.use('/uploads', express.static('uploads'))
 
     // Next.js routes
+    // Post for next-auth callbacks
     
     server.get('*', (req, res) => {
+      return handle(req, res)
+    })
+    server.post('*', (req, res) => {
       return handle(req, res)
     })
     

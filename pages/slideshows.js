@@ -11,9 +11,11 @@ import Dialog from '../components/Dialog.js'
 import { Button } from '../components/Form'
 
 import { addSlideshow } from '../actions/slideshow'
-import { protect } from '../helpers/auth.js'
 
 import { display } from '../stores'
+
+import { withRouter } from 'next/router.js'
+import { withSession } from '../lib/auth/auth.js'
 
 class Slideshows extends React.Component {
   constructor(props) {
@@ -28,12 +30,15 @@ class Slideshows extends React.Component {
   }
 
   componentDidMount() {
-    const { displayId } = this.props
+    //const { displayId } = this.props
+    const displayId = this.props.router.query.display
+    console.log('displayId : ', displayId)
     display.setId(displayId)
   }
 
   render() {
-    const { t, loggedIn } = this.props
+    const { t, session } = this.props
+    const loggedIn = session.status ==='authenticated'
     return (
       <Frame loggedIn={loggedIn}>
         <h1>{t('slideshows.title')}</h1>
@@ -66,4 +71,4 @@ class Slideshows extends React.Component {
   }
 }
 
-export default protect(withTranslation()(view(Slideshows)))
+export default withRouter(withTranslation()(withSession(view(Slideshows))))

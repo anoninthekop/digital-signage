@@ -11,9 +11,12 @@ import Dialog from '../../components/Dialog.js'
 import { Button } from '../../components/Form'
 
 import { addDisplay } from '../../actions/display'
-import { protect } from '../../helpers/auth.js'
 
 import { display } from '../../stores'
+
+import { authenticate } from 'passport'
+import { withSession } from '../../lib/auth/auth.js'
+
 
 class Screens extends React.Component {
   constructor(props) {
@@ -33,7 +36,9 @@ class Screens extends React.Component {
   }
 
   render() {
-    const { t, loggedIn } = this.props
+    const { t, session } = this.props
+    const loggedIn = session.status ==='authenticated'
+    console.log('LoggedIn Screens : ', loggedIn)
     return (
       <Frame loggedIn={loggedIn}>
         <h1>{t('screen.title')}</h1>
@@ -65,5 +70,5 @@ class Screens extends React.Component {
     )
   }
 }
-
-export default protect(withTranslation()(view(Screens)))
+//withSession(Screens)
+export default withTranslation()(withSession(view(Screens)))

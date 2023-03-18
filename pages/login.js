@@ -5,15 +5,15 @@ import { faTv, faCheck, faTimes, faAngleLeft } from '@fortawesome/free-solid-svg
 
 import { view } from '@risingstack/react-easy-state'
 
+import { signIn } from "next-auth/react"
+
 // i18next
 import { withTranslation } from 'react-i18next'
 
 
 import Frame from '../components/Admin/Frame.js'
-import { login } from '../helpers/auth.js'
 import { display } from '../stores'
-
-
+import { withSession } from '../lib/auth/auth.js'
 
 class Login extends Component {
 
@@ -40,6 +40,8 @@ class Login extends Component {
   performLogin = () => {
     const { username, password } = this.state
     const { displayId } = this.props
+    signIn("credentials", { callbackUrl: '/screens', username, password,})
+    /**
     login({ username, password }, undefined, displayId)
       .then(resp => {
         if (!resp.success) throw Error()
@@ -48,6 +50,7 @@ class Login extends Component {
       .catch(() => {
         this.setState({ alert: 'error' })
       })
+    */
   }
 
   usernameChangeHandler = event => {
@@ -63,12 +66,12 @@ class Login extends Component {
   }
 
   render() {
-    const { t, loggedIn } = this.props
+    const { t, session } = this.props
+    const loggedIn = session.status ==='authenticated'
     const { alert } = this.state
 
     return (
       <Frame loggedIn={loggedIn}>
-
         <h1>{t('login.title')}</h1>
   
         <div className='formContainer'>
@@ -243,4 +246,4 @@ class Login extends Component {
   }
 }
 
-export default withTranslation() (view(Login))
+export default withTranslation() (withSession(view(Login)))

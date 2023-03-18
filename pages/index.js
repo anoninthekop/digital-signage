@@ -29,7 +29,7 @@ class Index extends React.Component {
       <div className='home'>
         <p>{t('index.home')}</p>
         <div className='btn-group'>
-          <Link href='/layout' style={{ margin: 20 }}>
+          <Link href='/login' style={{ margin: 20 }}>
             <div className='btn admin'>{t('index.button.admin')}</div>
           </Link>
           <div style={{ margin: 20 }}>

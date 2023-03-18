@@ -22,7 +22,10 @@ import { StatusBarElementTypes } from '../helpers/statusbar.js'
 import Widgets from '../widgets'
 
 import { addWidget, getWidgets, deleteWidget, updateWidget } from '../actions/widgets'
-import { protect } from '../helpers/auth.js'
+
+import { withSession } from '../lib/auth/auth.js'
+import { withRouter } from 'next/router.js'
+
 import { display } from '../stores'
 
 const GridLayoutWithWidth = WidthProvider(GridLayout)
@@ -36,7 +39,9 @@ class Layout extends React.Component {
   }
 
   componentDidMount() {
-    const { displayId } = this.props
+    //const { displayId } = this.props
+    const displayId = this.props.router.query.display
+    console.log(displayId)
     display.setId(displayId)
     getWidgets(displayId).then(widgets => {
       this.setState({ widgets })
@@ -44,24 +49,23 @@ class Layout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.displayId != this.props.displayId) this.refresh()
+    if (prevProps.router.query.display != this.props.router.query.display) this.refresh()
   }
 
-  refresh = () => {
-    return getWidgets(display.id).then(widgets => {
-      this.setState({ widgets })
-    })
+  refresh = async () => {
+    const widgets = await getWidgets(display.id)
+    this.setState({ widgets })
   }
 
-  addWidget = type => {
+  addWidget = async type => {
     const widgetDefinition = Widgets[type]
-    return addWidget(display.id, type, widgetDefinition && widgetDefinition.defaultData).then(
-      this.refresh
-    )
+    const result = await addWidget(display.id, type, widgetDefinition && widgetDefinition.defaultData)
+    return this.refresh(result)
   }
 
-  deleteWidget = id => {
-    return deleteWidget(id).then(this.refresh)
+  deleteWidget = async id => {
+    const result = await deleteWidget(id)
+    return this.refresh(result)
   }
 
   onLayoutChange = layout => {
@@ -85,7 +89,8 @@ class Layout extends React.Component {
 
   render() {
     const { widgets } = this.state
-    const { t, loggedIn } = this.props
+    const { t, session } = this.props
+    const loggedIn = session.status ==='authenticated'
     const layout = widgets.map(widget => ({
       i: widget._id,
       x: widget.x || 0,
@@ -271,4 +276,4 @@ class Layout extends React.Component {
   }
 }
 
-export default (protect(withTranslation()(view(Layout))))
+export default withRouter(withTranslation()(withSession(view(Layout))))

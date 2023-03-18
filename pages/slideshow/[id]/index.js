@@ -16,8 +16,10 @@ import Button from '../../../components/Form/Button.js'
 import Dialog from '../../../components/Dialog.js'
 
 import { getSlideshow, updateSlideshow } from '../../../actions/slideshow'
-import { protect } from '../../../helpers/auth.js'
 import { display } from '../../../stores'
+
+import { withRouter } from 'next/router.js'
+import { withSession } from '../../../lib/auth/auth'
 
 const updateSlideshowThrottled = _.debounce((id, data) => {
   return updateSlideshow(id, data)
@@ -33,7 +35,9 @@ class Slideshow extends React.Component {
   }
 
   componentDidMount() {
-    const { displayId } = this.props
+    //const { displayId } = this.props
+    const displayId = this.props.router.query.display
+    console.log('displayId : ', displayId)
     display.setId(displayId)
   }
 
@@ -51,8 +55,9 @@ class Slideshow extends React.Component {
   }
 
   render() {
-    const {t, loggedIn } = this.props
+    const {t, session } = this.props
     const { slideshow } = this.state
+    const loggedIn = session.status ==='authenticated'
 
     return (
       <Frame loggedIn={loggedIn}>
@@ -156,4 +161,4 @@ export async function getServerSideProps({query,req}){
   return { props: {slideshow: slideshow, host: host }}
 }
 
-export default protect(withTranslation() (view(Slideshow)))
+export default withRouter(withTranslation() (withSession(view(Slideshow))))
