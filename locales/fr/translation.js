@@ -104,5 +104,39 @@ export const FRENCH = {
     },
     slidecard: {
       title: 'Sans titre'
+    },
+    slideditdialog:{
+      save : 'Sauvegarder',
+      cancel: 'Annuler',
+      slidetype: {
+        label: 'Type de Slide',
+        placeholder: '',
+        choices: {
+          youtube:'Vidéo Youtube',
+          web:'Page Web',
+          photo:'Photo'
+        }
+      },
+      photo: {
+        label: 'Photo',
+        placeholder: ''
+      },
+      data: {
+        youtube:'URL Web',
+        web:'URL Youtube',
+        data:'Donnée'
+      },
+      duration: {
+        label: 'Durée',
+        placeholder: '5'
+      },
+      title: {
+        label: 'Titre',
+        placeholder: 'En tête...'
+      },
+      description: {
+        label: 'Description',
+        placeholder: 'Description courte...'
+      }
     }
   }

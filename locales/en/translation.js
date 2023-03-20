@@ -77,6 +77,40 @@ export const ENGLISH = {
     },
     slidecard: {
       title: 'Untitled slide'
+    },
+    slideditdialog:{
+      save : 'Save',
+      cancel: 'Cancel',
+      slidetype: {
+        label: 'Slide Type',
+        placeholder: '',
+        choices: {
+          youtube:'Youtube Video',
+          web:'Web Page',
+          photo:'Photo'
+        }
+      },
+      photo: {
+        label: 'Photo',
+        placeholder: ''
+      },
+      data: {
+        youtube:'Web URL',
+        web:'Youtube URL',
+        data:'Data'
+      },
+      duration: {
+        label: 'Duration',
+        placeholder: '5'
+      },
+      title: {
+        label: 'Title',
+        placeholder: 'Header title...'
+      },
+      description: {
+        label: 'Description',
+        placeholder: 'Short content description...'
+      }
     }
 
   }
