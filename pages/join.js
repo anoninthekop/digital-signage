@@ -15,7 +15,7 @@ import Frame from '../components/Admin/Frame.js'
 import { display } from '../stores'
 import { withSession } from '../lib/auth/auth.js'
 
-class Login extends Component {
+class Join extends Component {
 
   constructor(props) {
     super(props)
@@ -23,6 +23,7 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      email: '',
       alert: null
     }
   }
@@ -37,12 +38,12 @@ class Login extends Component {
     display.setId(displayId)
   }
 
-  performLogin = () => {
+  performJoin = () => {
     const { username, password } = this.state
     const { displayId } = this.props
-    signIn("credentials", { callbackUrl: '/screens', username, password,})
+    signIn("credentials", { callbackUrl: '/', username, password, email})
     /**
-    login({ username, password }, undefined, displayId)
+    join({ username, password }, undefined, displayId)
       .then(resp => {
         if (!resp.success) throw Error()
         this.setState({ alert: 'success' })
@@ -65,14 +66,20 @@ class Login extends Component {
     })
   }
 
+  emailChangeHandler = event => {
+    this.setState({
+      email: event.target.value
+    })
+  }
+
   render() {
     const { t, session } = this.props
-    const loggedIn = session.status ==='authenticated'
+    const loggedIn = session.status !=='authenticated'
     const { alert } = this.state
 
     return (
       <Frame loggedIn={loggedIn}>
-        <h1>{t('login.title')}</h1>
+        <h1>{t('join.title')}</h1>
   
         <div className='formContainer'>
           <div className='logo'>
@@ -84,7 +91,7 @@ class Login extends Component {
             className='form'
             onSubmit={event => {
               event.preventDefault()
-              this.performLogin()
+              this.performjoin()
               return false
             }}
           >
@@ -98,42 +105,40 @@ class Login extends Component {
                 />
                 <span className={'alert-text'}>
                   {alert == 'success'
-                    ? t('login.alert.success')
-                    : t('login.alert.error')}
+                    ? t('join.alert.success')
+                    : t('join.alert.error')}
                 </span>
               </div>
             )}
-            <div className={'alert-info'}>
-              <span className={'alert-text'}>
-              {t('login.alert.info')}
-              </span>
-            </div>
-            <label htmlFor='username'>{t('login.username.name')}</label>
+            <label htmlFor='username'>{t('join.username.name')}</label>
             <input
               type='text'
               className='username'
               id='username'
-              placeholder= {t('login.username.placeholder')}
+              placeholder= {t('join.username.placeholder')}
               onChange={this.usernameChangeHandler}
             />
-            <label htmlFor='password'>{t('login.password.name')}</label>
+            <label htmlFor='email'>{t('join.email.name')}</label>
+            <input
+              type='email'
+              className='email'
+              id='email'
+              placeholder= {t('join.email.placeholder')}
+              onChange={this.emailChangeHandler}
+            />
+            <label htmlFor='password'>{t('join.password.name')}</label>
             <input
               type='password'
               className='password'
               id='password'
-              placeholder= {t('login.password.placeholder')}
+              placeholder= {t('join.password.placeholder')}
               onChange={this.passwordChangeHandler}
             />
-            <button>{t('login.submit')}</button>
+            <button>{t('join.submit')}</button>
           </form>
           <Link href='/join'>
-            <span className='join'>
-              <FontAwesomeIcon icon={faUsers} fixedWidth /> {t('login.join')}
-            </span>
-          </Link>
-          <Link href='/'>
             <span className='back'>
-              <FontAwesomeIcon icon={faAngleLeft} fixedWidth /> {t('login.back')}
+              <FontAwesomeIcon icon={faAngleLeft} fixedWidth /> {t('join.back')}
             </span>
           </Link>
         </div>
@@ -178,6 +183,7 @@ class Login extends Component {
               flex-direction: column;
             }
             .form input[type='text'],
+            .form input[type='email'],
             .form input[type='password'] {
               outline: none;
               background: #ededed;
@@ -259,4 +265,4 @@ class Login extends Component {
   }
 }
 
-export default withTranslation() (withSession(view(Login)))
+export default withTranslation() (withSession(view(Join)))

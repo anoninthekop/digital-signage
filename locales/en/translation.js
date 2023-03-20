@@ -67,6 +67,16 @@ export const ENGLISH = {
     },
     widgets: {
       emptywidget: 'This widget has no options.'
+    },
+    upload: {
+      dnd: {
+        true: 'Click or drop files here to add to the slideshow',
+        false: 'Drop files here to add to the slideshow'
+      },
+      alert: 'This file type is not allowed:'
+    },
+    slidecard: {
+      title: 'Untitled slide'
     }
 
   }

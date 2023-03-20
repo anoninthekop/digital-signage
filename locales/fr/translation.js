@@ -3,6 +3,7 @@ export const FRENCH = {
       title: 'Identification',
       submit: "S'identifier",
       back: "Retour à la page d'accueil",
+      join: 'Créer un compte',
       username: {
         name: 'Nom',
         placeholder: "Saisir votre nom d'utilisateur..."
@@ -10,6 +11,34 @@ export const FRENCH = {
       password: {
         name: 'Mot de passe',
         placeholder: 'Saisir votre mot de passe...'
+      },
+      email: {
+        name: 'Courriel',
+        placeholder: 'Saisir votre courriel...'
+      },
+      alert: {
+        info:  "Utiliser l'utiisateur 'demo' et le mot de passe 'demo'",
+        success: 'Identifié avec succes.',
+        error: 'Utilisateur ou Mot de Passe inconnu.'
+
+      }
+    },
+    join: {
+      title: 'Rejoindre',
+      submit: "Créer un compte",
+      back: "Retour à la page d'accueil",
+      join: 'Créer un compte',
+      username: {
+        name: 'Nom',
+        placeholder: "Saisir votre nom d'utilisateur..."
+      },
+      password: {
+        name: 'Mot de passe',
+        placeholder: 'Saisir votre mot de passe...'
+      },
+      email: {
+        name: 'Courriel',
+        placeholder: 'Saisir votre courriel...'
       },
       alert: {
         info:  "Utiliser l'utiisateur 'demo' et le mot de passe 'demo'",
@@ -66,4 +95,14 @@ export const FRENCH = {
       logout: '   Déconnexion',
       online: 'En ligne'
     },
+    upload: {
+      dnd: {
+        true: 'Sélectionner ou glisser des fichiers ici  pour les ajouter au slideshow',
+        false: 'Glisser des fichiers ici pour les ajouter au slideshow'
+      },
+      alert: "Ce type de fichier n'est pas autorisé : "
+    },
+    slidecard: {
+      title: 'Sans titre'
+    }
   }

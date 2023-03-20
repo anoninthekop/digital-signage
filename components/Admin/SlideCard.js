@@ -8,6 +8,9 @@ import SlideEditDialog from './SlideEditDialog'
 
 import { deleteSlide } from '../../actions/slide'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 class SlideCard extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +21,7 @@ class SlideCard extends Component {
   }
 
   render() {
-    const { value, refresh = () => {} } = this.props
+    const { t, value, refresh = () => {} } = this.props
     const { loading = false } = this.state
     return (
       <div className='card'>
@@ -45,7 +48,7 @@ class SlideCard extends Component {
           </div>
         </div>
         <div className='middle'>
-          <div className='title'>{value.title ? value.title : 'Untitled slide'}</div>
+          <div className='title'>{value.title ? value.title : t('slidecard.title')}</div>
           <div className='duration'>
             <div className='icon'>
               <FontAwesomeIcon icon={faClock} fixedWidth color='#878787' />
@@ -173,4 +176,4 @@ class SlideCard extends Component {
   }
 }
 
-export default SlideCard
+export default withTranslation() (SlideCard)

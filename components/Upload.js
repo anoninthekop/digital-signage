@@ -5,6 +5,9 @@ import dynamic from 'next/dynamic'
 
 import SlideEditDialog from './Admin/SlideEditDialog.js'
 
+// i18next
+import { withTranslation } from 'react-i18next'
+
 const DropzoneWithNoSSR = dynamic(() => import('react-dropzone'), {
   ssr: false,
   loading: () => (
@@ -37,11 +40,12 @@ class Upload extends Component {
   }
 
   handleOnDropRejected = rejectedFiles => {
-    alert('This file type is not allowed:' + rejectedFiles[rejectedFiles.length - 1].name)
+    alert(t('upload.alert') + rejectedFiles[rejectedFiles.length - 1].name)
   }
 
   render() {
-    const { slideshow, refresh } = this.props
+    const { t, slideshow, refresh } = this.props
+    console.log('Props Upload : ', this.props)
     const { lastFile } = this.state
     return (
       <div>
@@ -62,9 +66,9 @@ class Upload extends Component {
               <div {...getRootProps()} className='upload'>
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                  <p>Click or drop files here to add to the slideshow</p>
+                  <p>{t('upload.dnd.true')}</p>
                 ) : (
-                  <p>Drop files here to add to the slideshow </p>
+                  <p>{t('upload.dnd.false')}</p>
                 )}
               </div>
             )
@@ -89,4 +93,4 @@ class Upload extends Component {
   }
 }
 
-export default Upload
+export default withTranslation()(Upload)
