@@ -18,11 +18,30 @@ Administrator Panel: Slides inside a slideshow
 
 ![Screenshot of the administrator panel](assets/slides.png?raw=true)
 
+### Alpha branch
 
-### Demo
+1. Upgraded to next 12 and react 17
+2. Delete mongoose crudify
+3. Add next-auth (Demo account disactivated)
+3. Add i18next (Partial)
 
-See Create demo account below
+#### TODO
+1. Finalize translation (widget)
+2. Update weather widget to API 3.0
+3. Add new user  + role via next-auth
+4. Add ticker widget
+5. Add subcriptions, feeds, roles (Ex concerto)
+6. Auto detect size of screens
+7. ...
 
+## Demo
+
+### Docker Image
+
+```bash
+docker compose build
+docker compose up -d
+```
 ### How to Run:
 
 1. Set up a MongoDB installation locally (or in the cloud) and create a `digitaldisplay` database
