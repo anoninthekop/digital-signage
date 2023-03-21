@@ -18,6 +18,8 @@ const DEFAULT_UNIT = 'imperial'
 const DEFAULT_ZIP = '10001'
 const API_KEY = 'da6ef4bf43eed800fdadd4a728766089'
 const API_URL = 'http://api.openweathermap.org/data/2.5'
+const COUNTRY_CODE = 'fr'
+const LANG = 'fr'
 
 class WeatherContent extends Component {
   constructor(props) {
@@ -27,9 +29,9 @@ class WeatherContent extends Component {
   }
 
   componentDidMount() {
-    const { data: { unit = DEFAULT_UNIT, zip = DEFAULT_ZIP } = {} } = this.props
+    const { data: { unit = DEFAULT_UNIT, zip = DEFAULT_ZIP,country = COUNTRY_CODE, lang = LANG } = {} } = this.props
     axios
-      .get(`${API_URL}/weather?zip=${zip},us&apiKey=${API_KEY}&units=${unit}`)
+      .get(`${API_URL}/weather?zip=${zip},${country}&apiKey=${API_KEY}&units=${unit}&lang=${lang}`)
       .then(({ data }) => {
         const {
           name,
