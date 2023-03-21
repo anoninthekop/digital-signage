@@ -18,10 +18,30 @@ Administrator Panel: Slides inside a slideshow
 
 ![Screenshot of the administrator panel](assets/slides.png?raw=true)
 
+### Alpha branch
+
+1. Upgraded to next 12 and react 17
+2. Delete mongoose crudify
+3. Add next-auth (Demo account desactivacted)
+4. Add i18next (Partial)
+5. Dockerized
+
+#### TODO
+1. Finalize translation (widget)
+2. Update weather widget to API 3.0
+3. Add new user + role (next-auth)
+4. Add ticker widget
+5. Add subscriptions, feeds, roles (Ex concerto)
+6. Auto detection of screen size
+7. Switch to MUI interface
+8. ...
 
 ### Demo
 
-See Create demo account below
+```bash
+docker compose build
+docker compose up -d
+```
 
 ### How to Run:
 
