@@ -12,7 +12,7 @@
     "start": "node server.js",
     "test": "echo \"No test specified yet.\" && exit 0",
     "update": "git pull && npm i && npm run build",
-    "heroku-postbuild": "next build"
+    "docker": "next build"
   },
   "repository": {
     "type": "git",

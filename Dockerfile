@@ -1,6 +1,8 @@
-FROM node:16-alpine AS deps
+FROM node:16-alpine AS dev
 WORKDIR /app
-COPY . ./
-RUN npm install
+COPY package*.json ./
+RUN npm ci && npm cache clean --force
+COPY . .
+ENV MONGODB_URI=mongodb://mongo:27017/digitaldisplay
 RUN npm run build
-CMD ["node","/app/server.js"]
+CMD ["npm","start"]
