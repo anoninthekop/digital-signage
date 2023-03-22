@@ -14,6 +14,7 @@ import { withTranslation } from 'react-i18next'
 import Frame from '../components/Admin/Frame.js'
 import { display } from '../stores'
 import { withSession } from '../lib/auth/auth.js'
+import { addUser } from '../actions/user.js'
 
 class Join extends Component {
 
@@ -38,20 +39,21 @@ class Join extends Component {
     display.setId(displayId)
   }
 
-  performJoin = () => {
-    const { username, password } = this.state
-    const { displayId } = this.props
-    signIn("credentials", { callbackUrl: '/', username, password, email})
-    /**
-    join({ username, password }, undefined, displayId)
-      .then(resp => {
-        if (!resp.success) throw Error()
-        this.setState({ alert: 'success' })
-      })
-      .catch(() => {
-        this.setState({ alert: 'error' })
-      })
-    */
+  performJoin() {
+    const { username, password, email } = this.state
+    const user = {
+      username: username,
+      email: email,
+      password: password
+    }
+    addUser(user)
+    .then(resp => {
+      if (!resp.success) throw Error()
+      this.setState({ alert: 'success' })
+    })
+    .catch(() => {
+      this.setState({ alert: 'error' })
+    })
   }
 
   usernameChangeHandler = event => {
@@ -91,7 +93,7 @@ class Join extends Component {
             className='form'
             onSubmit={event => {
               event.preventDefault()
-              this.performjoin()
+              this.performJoin()
               return false
             }}
           >
@@ -136,7 +138,7 @@ class Join extends Component {
             />
             <button>{t('join.submit')}</button>
           </form>
-          <Link href='/join'>
+          <Link href='/'>
             <span className='back'>
               <FontAwesomeIcon icon={faAngleLeft} fixedWidth /> {t('join.back')}
             </span>

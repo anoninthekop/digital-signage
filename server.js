@@ -1,12 +1,11 @@
 /* eslint-disable multiline-comment-style */
 const express = require('express')
 const next = require('next')
-const mongoose = require('mongoose')
-const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const session = require('cookie-session')
 const bodyParser = require('body-parser')
 const socketIo = require('socket.io')
+const dbConnect = require('./lib/db/dbConnect')
 
 const Keys = require('./keys')
 
@@ -19,7 +18,6 @@ const handle = app.getRequestHandler()
 
 
 const apiRoutes = require('./api/routes')
-const User = require('./api/models/User')
 
 app
   .prepare()
@@ -34,15 +32,7 @@ app
     })
 
     // MongoDB
-    mongoose.Promise = Promise
-    mongoose.connect(
-      Keys.MONGODB_URI,
-      { useNewUrlParser: true,
-        useUnifiedTopology: true
-      }
-    )
-    const db = mongoose.connection
-    db.on('error', console.error.bind(console, 'connection error:'))
+    dbConnect()
 
     // Parse application/x-www-form-urlencoded
     server.use(bodyParser.urlencoded({ extended: false }))
@@ -59,13 +49,6 @@ app
         saveUninitialized: false
       })
     )
-
-    // Passport
-    passport.use(User.createStrategy())
-    passport.serializeUser(User.serializeUser())
-    passport.deserializeUser(User.deserializeUser())
-    server.use(passport.initialize())
-    server.use(passport.session())
 
     let io
     server.use(function(req, res, next) {
