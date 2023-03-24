@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import axios from 'axios'
+import { getUserByUsername } from "../../../actions/user"
 import Router from 'next/router'
 
 
@@ -12,16 +13,16 @@ export const authOptions = {
           username: {label:'Username', type:'text'},
           password: {label:'Password', type: 'password'}
         },
-        async authorize(credentials, host='',req) {
-          console.log('Autorize : ', credentials)
-          //const user = await axios.post(host + '/api/v1/user/login', { username: credentials.username, password: credentials.password })
-          const user = {name: 'demo', password:'demo'}
-          if (user) {
-            console.log('User Axios : ', user)
-            return user
-          }else{
-            return null
+        async authorize(credentials, host='') {
+          try{
+          const resp = await axios.post('http://localhost:3001/api/v1/users/signin',{username: credentials.username, password: credentials.password})
+          if(!resp) return null
+          const user = {name: resp.data.username , email: resp.data.email}
+          return user
+          }catch(error){
+            return {succes: false}
           }
+
         }
     })
     // ...add more providers here
@@ -32,14 +33,13 @@ export const authOptions = {
       console.log('Redirect: ', baseUrl, 'Url : ', url)
       return baseUrl 
     },*/
-    async session({ session, token, user }) {
-      console.log('Session: ', session, ' User : ', user, ' Token : ', token)
-      session.user = token.user
+    async session({ session, token }) {
+      console.log('Session: ', session, ' Token : ', token)
       return session
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      console.log('Jwt: ', token, ' User : ', user, ' Account : ', account, 'Profile : ', profile, 'IsNewUser : ', isNewUser)
-      token.user = user
+    async jwt({ token }) {
+      console.log('Jwt: ', token)
+      //token.user = user
       return token
     }
   },

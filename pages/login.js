@@ -40,17 +40,9 @@ class Login extends Component {
   performLogin = () => {
     const { username, password } = this.state
     const { displayId } = this.props
-    signIn("credentials", { callbackUrl: '/screens', username, password,})
-    /**
-    login({ username, password }, undefined, displayId)
-      .then(resp => {
-        if (!resp.success) throw Error()
-        this.setState({ alert: 'success' })
-      })
-      .catch(() => {
-        this.setState({ alert: 'error' })
-      })
-    */
+
+    signIn("credentials", { callbackUrl: '/screens', username:username, password:password})
+
   }
 
   usernameChangeHandler = event => {

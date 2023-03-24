@@ -1,8 +1,19 @@
 import axios from 'axios'
 
 export const addUser = async (req, host='') => {
-  console.log('Action addUser : ', req)
-  const res = await axios.post(host + '/api/v1/users', req)
-  console.log('Res axios : ',res)
-  return res
+  try{
+   return await axios.post(host + '/api/v1/users', req)
+  }catch(err){
+    return err
+  }
+}
+
+export const getUserByUsername = async (username, host = '') => {
+  try{
+  const user = await axios.post(host + '/api/v1/users/signin', username)
+  console.log('user : ', user)
+  return user
+}catch(err){
+  return err
+}
 }

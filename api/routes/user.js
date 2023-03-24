@@ -14,9 +14,32 @@ router.get('/logout', (req, res) => {
   res.redirect('/login')
 })
 
+
+// Route: /api/v1/users/signin
+
+router
+  .post('/signin', async(req,res) => {
+    try{
+      const { username } = req.body
+      console.debug('Req Username : ', req)
+      return User.findOne({username: username})
+        .then(result => {
+            console.log('Resultat : ',result)
+            return res.json(result)
+        })
+        .catch(error => {
+          return res.json(error)
+        })
+    }catch(err){
+      return err
+    }
+ 
+  })
+
 // Route: /api/v1/users
 
-router.post('/', (req, res, next) => {
+router
+  .post('/', (req, res, next) => {
   console.log('Post', req.body)
   const user = new User({
     username: req.body.user.username,
@@ -32,6 +55,18 @@ router.post('/', (req, res, next) => {
     .catch((err)=>{
       console.log('Error : ',err)
     })
-})
+  })
+  .get('/', async(req,res) => {
+    console.log('Gest Users : ', req)
+    try{
+      const { username } = req
+      const user = await User.findOne({username: username})
+      console.log('user : ', user)
+      return res.json(user)
+    }catch(err){
+      console.log('Error : ', err)
+      return res.json(null)
+    }
+  })
 
 module.exports = router

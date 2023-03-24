@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-//const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const User = new Schema({
     username: {
@@ -18,7 +18,7 @@ const User = new Schema({
     password: {
         type: String,
         //required: [true, "Please enter your email"],
-        minLength: [3, "Your password must be at least 6 characters long"],
+        minLength: [6, "Your password must be at least 6 characters long"],
         select: false, //dont send back password after request
     },
     role: {
@@ -30,8 +30,8 @@ const User = new Schema({
 },{ timestamps: true })
 
 // ENCRYPTION 
-/**
-userSchema.pre('save', async function(next){
+
+User.pre('save', async function(next){
     if(!this.isModified('password')){
         next()
     }
@@ -39,8 +39,8 @@ userSchema.pre('save', async function(next){
     next()
 })
 
-userSchema.methods.comparePassword = async function(enteredPassword){
+User.methods.comparePassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword, this.password)
 }
-*/
+
 module.exports = mongoose.model('User', User)

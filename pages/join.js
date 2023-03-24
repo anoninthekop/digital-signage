@@ -1,17 +1,11 @@
 import { Component } from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTv, faCheck, faTimes, faAngleLeft, faUsers } from '@fortawesome/free-solid-svg-icons'
-
-import { view } from '@risingstack/react-easy-state'
-
-import { signIn } from "next-auth/react"
-
+import { faTv, faCheck, faTimes, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import Router from 'next/router'
 // i18next
 import { withTranslation } from 'react-i18next'
 
-
-import Frame from '../components/Admin/Frame.js'
 import { display } from '../stores'
 import { addUser } from '../actions/user.js'
 
@@ -39,6 +33,10 @@ class Join extends Component {
     display.setId(displayId)
   }
 
+  navigateToHome = () => {
+    Router.push('/')
+  }
+
   performJoin() {
     const { username, password, email } = this.state
     const user = {
@@ -48,12 +46,10 @@ class Join extends Component {
     }
     addUser({user})
     .then(resp => {
-      console.log('performJoin : ', resp.data)
       if (!resp.data) throw Error()
       this.setState({ alert: 'success' })
     })
     .catch(() => {
-      console.log('Error Join')
       this.setState({ alert: 'error' })
     })
   }
