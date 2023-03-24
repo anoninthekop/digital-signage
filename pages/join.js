@@ -13,8 +13,8 @@ import { withTranslation } from 'react-i18next'
 
 import Frame from '../components/Admin/Frame.js'
 import { display } from '../stores'
-import { withSession } from '../lib/auth/auth.js'
 import { addUser } from '../actions/user.js'
+
 
 class Join extends Component {
 
@@ -46,12 +46,14 @@ class Join extends Component {
       email: email,
       password: password
     }
-    addUser(user)
+    addUser({user})
     .then(resp => {
-      if (!resp.success) throw Error()
+      console.log('performJoin : ', resp.data)
+      if (!resp.data) throw Error()
       this.setState({ alert: 'success' })
     })
     .catch(() => {
+      console.log('Error Join')
       this.setState({ alert: 'error' })
     })
   }
@@ -75,14 +77,10 @@ class Join extends Component {
   }
 
   render() {
-    const { t, session } = this.props
-    const loggedIn = session.status !=='authenticated'
+    const { t } = this.props
     const { alert } = this.state
 
     return (
-      <Frame loggedIn={loggedIn}>
-        <h1>{t('join.title')}</h1>
-  
         <div className='formContainer'>
           <div className='logo'>
             <div className='icon'>
@@ -143,7 +141,6 @@ class Join extends Component {
               <FontAwesomeIcon icon={faAngleLeft} fixedWidth /> {t('join.back')}
             </span>
           </Link>
-        </div>
         <style jsx>
           {`
             h1 {
@@ -262,9 +259,9 @@ class Join extends Component {
             }
           `}
         </style>
-      </Frame>
+      </div>
     )
   }
 }
 
-export default withTranslation() (withSession(view(Join)))
+export default withTranslation() (Join)

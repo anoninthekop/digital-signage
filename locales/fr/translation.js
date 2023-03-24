@@ -41,9 +41,9 @@ export const FRENCH = {
         placeholder: 'Saisir votre courriel...'
       },
       alert: {
-        info:  "Utiliser l'utiisateur 'demo' et le mot de passe 'demo'",
-        success: 'Identifié avec succes.',
-        error: 'Utilisateur ou Mot de Passe inconnu.'
+        info:  "L'identifiant ainsi que votre courriel doit être unique. Mot de passe minimum 6 caractères",
+        success: 'Votre compte a été créé avec succes.',
+        error: 'Identifiant ou Courriel déjà existant.'
 
       }
     },

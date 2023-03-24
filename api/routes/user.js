@@ -16,14 +16,21 @@ router.get('/logout', (req, res) => {
 
 // Route: /api/v1/users
 
-router.post('/', (req, res) => {
-  //return User.create(req.body)
-  console.log('Post Users : ',req)
-  
-  const user = new User(req)
-  user.save()
-    .then(resp => {
-      return (resp) ? res.json({succes:true, res:resp}) : res.json({succes:false})
+router.post('/', (req, res, next) => {
+  console.log('Post', req.body)
+  const user = new User({
+    username: req.body.user.username,
+    email: req.body.user.email,
+    password: req.body.user.password
+  })
+  return user
+    .save()
+    .then((res) => {
+      console.log('Res : ',res)
+      return res.json({succes:true})
+    })
+    .catch((err)=>{
+      console.log('Error : ',err)
     })
 })
 
