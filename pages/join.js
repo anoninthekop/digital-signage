@@ -19,7 +19,8 @@ class Join extends Component {
       username: '',
       password: '',
       email: '',
-      alert: null
+      alert: null,
+      message:''
     }
   }
 
@@ -46,11 +47,18 @@ class Join extends Component {
     }
     addUser({user})
     .then(resp => {
-      if (!resp.data) throw Error()
+      console.log('ADDUSER : ', resp.data)
+      if (resp.data.error) {
+        console.log('ERROR : ', resp.data.error)
+        this.setState({ message: resp.data.error.message})
+        throw new Error()
+      } else {
       this.setState({ alert: 'success' })
+      Router.push('/')
+      }
     })
     .catch(() => {
-      this.setState({ alert: 'error' })
+      this.setState({ alert: 'error'})
     })
   }
 
@@ -74,14 +82,18 @@ class Join extends Component {
 
   render() {
     const { t } = this.props
-    const { alert } = this.state
+    const { alert, message } = this.state
 
     return (
         <div className='formContainer'>
           <div className='logo'>
             <div className='icon'>
               <FontAwesomeIcon icon={faTv} fixedWidth size='lg' color='#7bc043' />
+              
             </div>
+          </div>
+          <div className='title'>
+              <h1>{t('join.title')}</h1>
           </div>
           <form
             className='form'
@@ -104,6 +116,11 @@ class Join extends Component {
                     ? t('join.alert.success')
                     : t('join.alert.error')}
                 </span>
+              </div>
+            )}
+            {message && (
+              <div className={`message-${message}`}>
+                <p>{message}</p>
               </div>
             )}
             <label htmlFor='username'>{t('join.username.name')}</label>
@@ -162,6 +179,11 @@ class Join extends Component {
               justify-content: center;
               align-items: center;
               transform: scale(2);
+            }
+            .title{
+              color: white;
+              margin-left: 8px;
+              text-align: center;
             }
             .form {
               background: white;

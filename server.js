@@ -4,7 +4,7 @@ const next = require('next')
 const cookieParser = require('cookie-parser')
 const session = require('cookie-session')
 const bodyParser = require('body-parser')
-const socketIo = require('socket.io')
+const { Server} = require('socket.io')
 const dbConnect = require('./lib/db/dbConnect')
 
 const Keys = require('./keys')
@@ -80,7 +80,7 @@ app
     })
 
     // Socket.io
-    io = socketIo.listen(finalServer)
+    io = new Server(finalServer)
   })
   .catch(ex => {
     // eslint-disable-next-line

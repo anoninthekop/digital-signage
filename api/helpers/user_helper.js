@@ -10,6 +10,7 @@ function newUser(req) {
   return newUser.save()
 }
 
+
 module.exports = {
   newUser
 }

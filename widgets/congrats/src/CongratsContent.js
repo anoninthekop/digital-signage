@@ -45,7 +45,7 @@ class CongratsContent extends Component {
         <AutoScroll style={{ display: 'block' }}>
           <div className='text'>
             {text.split('\n').map(line => (
-              <div>{line || <br />}</div>
+              <div key={line}>{line || <br />}</div>
             ))}
           </div>
         </AutoScroll>

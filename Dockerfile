@@ -1,4 +1,4 @@
-FROM node:16-alpine AS dev
+FROM node:18-alpine AS dev
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci && npm cache clean --force

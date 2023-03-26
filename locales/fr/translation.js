@@ -93,7 +93,10 @@ export const FRENCH = {
       slideshow:'Slideshows',
       login: "S'identifier",
       logout: '   Déconnexion',
-      online: 'En ligne'
+      online: 'En ligne',
+      session : {
+        username: 'Bienvenue '
+      }
     },
     upload: {
       dnd: {

@@ -37,8 +37,10 @@ class Sidebar extends Component {
 
   componentDidMount() {
     const host = window.location.origin
-    getDisplays(host).then(displays => {
+    getDisplays(host).then(async displays => {
       this.setState({ displays })
+      const displayId = (display.id === null) ? displays[0]._id : display.id
+      await display.setId(displayId)
     })
   }
 
@@ -114,6 +116,9 @@ class Sidebar extends Component {
           </DropdownButton>
         )}
         <ul className='menu'>
+          <li>
+            {t('sidebar.session.username')} {session?.data?.user.name}
+          </li>
           {menu.map(item => (
             <Link href={item.path} key={item.path}>
               <li className={item.path == router.pathname && 'active'}>
@@ -129,7 +134,7 @@ class Sidebar extends Component {
           ))}
         </ul>
         {loggedIn && (
-          <div className='logout' onClick={() => signOut({callbackUrl: '/login'})}>
+          <div className='logout' onClick={() => signOut({callbackUrl: '/'})}>
             <a>
               <FontAwesomeIcon icon={faSignOutAlt} fixedWidth />
               <span className={'text'}>{t('sidebar.logout')}</span>
@@ -146,6 +151,7 @@ class Sidebar extends Component {
               display: flex;
               flex-direction: column;
             }
+
             .menu {
               list-style: none;
               padding: 0px;

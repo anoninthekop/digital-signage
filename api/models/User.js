@@ -19,7 +19,7 @@ const User = new Schema({
         type: String,
         //required: [true, "Please enter your email"],
         minLength: [6, "Your password must be at least 6 characters long"],
-        select: false, //dont send back password after request
+        //select: false, //dont send back password after request
     },
     role: {
         type: String,
@@ -39,7 +39,8 @@ User.pre('save', async function(next){
     next()
 })
 
-User.methods.comparePassword = async function(enteredPassword){
+User.methods.comparePassword = async function(enteredPassword, userPassword){
+    console.log('User comparePassword : ', enteredPassword, ' model : ', userPassword)
     return await bcrypt.compare(enteredPassword, this.password)
 }
 

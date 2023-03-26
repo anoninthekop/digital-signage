@@ -20,19 +20,18 @@ Administrator Panel: Slides inside a slideshow
 
 ### Alpha branch
 
-1. Upgraded to next 12 and react 17
+1. Upgraded to next@12, react@17, nodejs@18
 2. Delete mongoose crudify
 3. Add next-auth (Demo account disactivated)
 3. Add i18next (Partial)
 
 #### TODO
 1. Finalize translation (widget)
-2. Update weather widget to API 3.0
-3. Add new user  + role via next-auth
-4. Add ticker widget
-5. Add subcriptions, feeds, roles (Ex concerto)
-6. Auto detect size of screens
-7. ...
+2. Add ticker widget
+3. Add subcriptions, feeds, roles (Ex concerto)
+4. Auto detect size of screens
+5. Mui experience
+6. ...
 
 ## Demo
 

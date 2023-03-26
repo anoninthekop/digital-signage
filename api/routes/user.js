@@ -19,21 +19,22 @@ router.get('/logout', (req, res) => {
 
 router
   .post('/signin', async(req,res) => {
-    try{
-      const { username } = req.body
-      console.debug('Req Username : ', req)
+      const { username, password } = req.body
+
       return User.findOne({username: username})
-        .then(result => {
-            console.log('Resultat : ',result)
-            return res.json(result)
+        .then(async (user) => {
+          if (user){
+            console.log ('Route signin : ', user, 'Pass : ', password)
+            const isValid = await user.comparePassword(password, user.password)
+            console.log('IsValid : ', isValid)
+            if(!isValid) throw new Error()
+            return res.json(user)
+          }
+          throw new Error()
         })
-        .catch(error => {
-          return res.json(error)
+        .catch((err) => {
+          return res.json({error:'User not Found'})
         })
-    }catch(err){
-      return err
-    }
- 
   })
 
 // Route: /api/v1/users
@@ -48,12 +49,16 @@ router
   })
   return user
     .save()
-    .then((res) => {
-      console.log('Res : ',res)
-      return res.json({succes:true})
+    .then((user) => {
+      if(user){
+      console.log('Res : ',user)
+      return res.json(user)
+      }
+      throw new Error()
     })
     .catch((err)=>{
       console.log('Error : ',err)
+      return res.json({error:err})
     })
   })
   .get('/', async(req,res) => {

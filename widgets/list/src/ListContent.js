@@ -34,8 +34,8 @@ class ListContent extends Component {
               paddingBottom: 12
             }}
           >
-            {list.map(({ text, label }) => (
-              <div className='element'>
+            {list.map(({ text, label, index }) => (
+              <div key= {index} className='element'>
                 <span className='text'>{text || 'Insert some text ...'}</span>
                 {label && <div className='label'>{label}</div>}
               </div>

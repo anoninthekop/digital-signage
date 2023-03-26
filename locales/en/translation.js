@@ -63,7 +63,10 @@ export const ENGLISH = {
       slideshow:'Slideshows',
       login: 'Login',
       logout: '   Logout',
-      online: 'online'
+      online: 'online',
+      session : {
+        username: 'Welcome '
+      }
     },
     widgets: {
       emptywidget: 'This widget has no options.'

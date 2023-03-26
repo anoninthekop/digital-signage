@@ -3,6 +3,10 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import axios from 'axios'
 import { getUserByUsername } from "../../../actions/user"
 import Router from 'next/router'
+import { signIn } from "next-auth/react"
+
+import { display } from '../../../stores/display'
+import { getDisplays } from '../../../actions/display'
 
 
 export const authOptions = {
@@ -13,33 +17,29 @@ export const authOptions = {
           username: {label:'Username', type:'text'},
           password: {label:'Password', type: 'password'}
         },
-        async authorize(credentials, host='') {
-          try{
-          const resp = await axios.post('http://localhost:3001/api/v1/users/signin',{username: credentials.username, password: credentials.password})
-          if(!resp) return null
-          const user = {name: resp.data.username , email: resp.data.email}
-          return user
-          }catch(error){
-            return {succes: false}
+        async authorize(credentials) {
+          const user = await axios.post('http://localhost:3001/api/v1/users/signin',{username: credentials.username, password: credentials.password})
+          console.log('AUTHORIZE : ', user.data)
+          if(user.data.error){
+            throw new Error('No user found!')
           }
-
+          return user.data
         }
     })
     // ...add more providers here
   ],
   callbacks: {
-    /**
-    async redirect({ url, baseUrl }) {
-      console.log('Redirect: ', baseUrl, 'Url : ', url)
-      return baseUrl 
-    },*/
     async session({ session, token }) {
-      console.log('Session: ', session, ' Token : ', token)
+      session.user.role = token.role
+      console.log('Session: ', session, ' token : ', token)
       return session
     },
-    async jwt({ token }) {
-      console.log('Jwt: ', token)
-      //token.user = user
+    async jwt({ token, user, profile, isNewUser }) {
+      console.log('Token: ', token, 'user : ', user, 'Profile : ', profile, 'isNewUser : ', isNewUser)
+      if(user){
+        token.name = user.username
+        token.role = user.role
+      }
       return token
     }
   },
@@ -49,6 +49,9 @@ export const authOptions = {
     signOut: '/'
   },
   debug: true,
+  session : {
+    strategy: 'jwt'
+  }
 }
 
 export default NextAuth(authOptions)

@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Link from 'next/link'
+import Router from 'next/router.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTv, faCheck, faTimes, faAngleLeft, faUsers } from '@fortawesome/free-solid-svg-icons'
 
@@ -39,10 +40,20 @@ class Login extends Component {
 
   performLogin = () => {
     const { username, password } = this.state
-    const { displayId } = this.props
+    //const { displayId } = this.props
 
-    signIn("credentials", { callbackUrl: '/screens', username:username, password:password})
-
+    signIn("credentials", { redirect: false,username:username, password:password})
+      .then(({ok,url, error, status }) => {
+        console.log('Error : ',error, 'OK : ', ok, 'URL : ',url, ' Status : ', status)
+      if(ok) {
+        this.setState({alert:'success'})
+        Router.push('/screens')
+      }else{
+        console.log(error)
+        this.setState({ alert: 'error' })
+        Router.push('/login')
+    }
+    })
   }
 
   usernameChangeHandler = event => {
@@ -58,19 +69,21 @@ class Login extends Component {
   }
 
   render() {
-    const { t, session } = this.props
-    const loggedIn = session.status ==='authenticated'
+    const { t } = this.props
+    //const loggedIn = session.status ==='authenticated'
     const { alert } = this.state
 
     return (
-      <Frame loggedIn={loggedIn}>
-        <h1>{t('login.title')}</h1>
+      
   
         <div className='formContainer'>
           <div className='logo'>
             <div className='icon'>
               <FontAwesomeIcon icon={faTv} fixedWidth size='lg' color='#7bc043' />
             </div>
+          </div>
+          <div className='title'>
+              <h1>{t('login.title')}</h1>
           </div>
           <form
             className='form'
@@ -95,11 +108,6 @@ class Login extends Component {
                 </span>
               </div>
             )}
-            <div className={'alert-info'}>
-              <span className={'alert-text'}>
-              {t('login.alert.info')}
-              </span>
-            </div>
             <label htmlFor='username'>{t('login.username.name')}</label>
             <input
               type='text'
@@ -128,7 +136,7 @@ class Login extends Component {
               <FontAwesomeIcon icon={faAngleLeft} fixedWidth /> {t('login.back')}
             </span>
           </Link>
-        </div>
+
         <style jsx>
           {`
             h1 {
@@ -154,6 +162,11 @@ class Login extends Component {
               justify-content: center;
               align-items: center;
               transform: scale(2);
+            }
+            .title{
+              color: white;
+              margin-left: 8px;
+              text-align: center
             }
             .form {
               background: white;
@@ -246,7 +259,7 @@ class Login extends Component {
             }
           `}
         </style>
-      </Frame>
+      </div>
     )
   }
 }

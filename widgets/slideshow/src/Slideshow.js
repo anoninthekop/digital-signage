@@ -37,6 +37,13 @@ class Slideshow extends Component {
     })
   }
 
+  componentWillUnmount = () => {
+    if(this.timerHandle) {
+      clearTimeout(this.timerHandle);
+      this.timerHandle = null
+    }
+};
+
   /**
    * Sorts the slides by the given `order` value of each slide and returns the
    * slides array in the sorted order
@@ -81,7 +88,7 @@ class Slideshow extends Component {
       this.slideRefs[current] &&
         this.slideRefs[current].loadedPromise.then(() => {
           this.setState({ ready: true })
-          setTimeout(
+          this.timerHandle = setTimeout(
             () =>
               this.nextSlide().then(() => {
                 this.waitForNextSlide()
