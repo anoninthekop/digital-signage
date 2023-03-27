@@ -19,9 +19,6 @@ export default class NextApp extends App {
     const { Component, pageProps: {session, ...pageProps}} = this.props
     return (
       <>
-        <Head>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
-        </Head>
         <SessionProvider session={session}>
           <I18nextProvider i18n={i18n}>
             <Component {...pageProps} />
