@@ -16,18 +16,30 @@ class AutoScroll extends React.Component {
     if (!containerNode) return
 
     const { duration = 3000 } = this.props
-    setInterval(() => {
+    this.intervalHandle = setInterval(() => {
       animateScrollTo(9999999, {
         minDuration: duration,
         element: containerNode
       })
-      setTimeout(() => {
+      this.timeoutHandle = setTimeout(() => {
         animateScrollTo(0, {
           minDuration: duration,
           element: containerNode
         })
       }, duration)
     }, duration)
+  }
+
+  componentWillUnmount() {
+    if(this.intervalHandle){
+      clearInterval(this.intervalHandle)
+      this.intervalHandle = null
+    }
+
+    if(this.timeoutHandle){
+      clearTimeout(this.timeoutHandle)
+      this.timeoutHandle = null
+    }
   }
 
   render() {

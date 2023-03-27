@@ -14,7 +14,6 @@ import { addDisplay } from '../../actions/display'
 
 import { display } from '../../stores'
 
-import { authenticate } from 'passport'
 import { withSession } from '../../lib/auth/auth.js'
 
 

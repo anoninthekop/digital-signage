@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Input } from '../../../components/Form'
+import { countries } from '../../../lib/countries'
 
 class WeatherOptions extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class WeatherOptions extends Component {
     this.state = {
       zip,
       unit,
-      country
+      country,
+      countries: countries
     }
   }
   handleChange = (name, value) => {
@@ -32,9 +34,13 @@ class WeatherOptions extends Component {
         <Input
           inline={false}
           label={'Country'}
-          type={'text'}
+          type={'select'}
           name={'country'}
           value={country}
+          choices= {countries.map(countrie => ({
+            id : countrie.id,
+            label: countrie.name
+          }))}
           onChange={this.handleChange}
         />
         <Input

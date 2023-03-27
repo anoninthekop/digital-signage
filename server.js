@@ -10,7 +10,9 @@ const dbConnect = require('./lib/db/dbConnect')
 const Keys = require('./keys')
 
 const dev = Keys.ENVIRON !== 'PROD'
-const app = next({ dev })
+const port = Keys.PORT
+const hostname = 'localhost'
+const app = next({ dev,hostname, port })
 /*
 const routes = require('./routes')
 */
@@ -73,10 +75,10 @@ app
     })
     
 
-    const finalServer = server.listen(Keys.PORT, err => {
+    const finalServer = server.listen(port, err => {
       if (err) throw err
       // eslint-disable-next-line
-      console.log('> Ready on http://localhost:' + Keys.PORT)
+      console.log('> Ready on http://localhost:' + port)
     })
 
     // Socket.io

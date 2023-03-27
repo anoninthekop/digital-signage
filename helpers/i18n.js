@@ -1,13 +1,16 @@
 
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { FRENCH } from '../locales/fr/translation'
 import { ENGLISH } from '../locales/en/translation'
 
+const lngDetector = new LanguageDetector()
 
 i18n
     .use(initReactI18next) // passes i18n down to react-i18next
+    .use(lngDetector)
     .init({
     resources: {
         fr: {
@@ -18,7 +21,7 @@ i18n
         }
     },
     // eslint-disable-next-line max-len
-    lng: 'fr', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
+    //lng: 'fr', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
     /*
      * you can use the i18n.changeLanguage function to change
      * the language manually: https://www.i18next.com/overview/api#changelanguage

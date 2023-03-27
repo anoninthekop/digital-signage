@@ -1,13 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import axios from 'axios'
-import { getUserByUsername } from "../../../actions/user"
-import Router from 'next/router'
-import { signIn } from "next-auth/react"
-
-import { display } from '../../../stores/display'
-import { getDisplays } from '../../../actions/display'
-
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -31,11 +24,9 @@ export const authOptions = {
   callbacks: {
     async session({ session, token }) {
       session.user.role = token.role
-      console.log('Session: ', session, ' token : ', token)
       return session
     },
     async jwt({ token, user, profile, isNewUser }) {
-      console.log('Token: ', token, 'user : ', user, 'Profile : ', profile, 'isNewUser : ', isNewUser)
       if(user){
         token.name = user.username
         token.role = user.role
