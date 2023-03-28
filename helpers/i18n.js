@@ -9,16 +9,22 @@ import { ENGLISH } from '../locales/en/translation'
 const lngDetector = new LanguageDetector()
 
 i18n
-    .use(initReactI18next) // passes i18n down to react-i18next
     .use(lngDetector)
+    .use(initReactI18next) // passes i18n down to react-i18next
     .init({
-    resources: {
-        fr: {
-            translation: FRENCH
-        },
-        en : {
-            translation: ENGLISH
-        }
+      preload:['en', 'fr'],
+      fallbackLng: 'en',
+      debug: false,   
+      resources: {
+          fr: {
+              translation: FRENCH
+          },
+          en : {
+              translation: ENGLISH
+          }
+    },
+    react: {
+      useSuspense: false
     },
     // eslint-disable-next-line max-len
     //lng: 'fr', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
@@ -27,6 +33,7 @@ i18n
      * the language manually: https://www.i18next.com/overview/api#changelanguage
      * if you're using a language detector, do not define the lng option
      */
+    
     interpolation: {
       escapeValue: false // react already safes from xss
     }
