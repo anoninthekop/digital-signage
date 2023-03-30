@@ -202,7 +202,7 @@ class Join extends Component {
             .form input[type='text'],
             .form input[type='email'],
             .form input[type='password'] {
-              outline: none;
+              outline: solid;
               background: #ededed;
               border-radius: 8px;
               font-family: 'Open Sans', sans-serif;
