@@ -3,7 +3,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-
+  excludeDefaultMomentLocales: false
 }
 
 module.exports = nextConfig
